@@ -78,7 +78,6 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "@apollo/client": "3.11.4",
     "@babel/runtime": "^7.21.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -91,16 +90,20 @@
     "@mui/x-charts-pro": "^7.27.1",
     "buffer": "^6.0.3",
     "classnames": "2.5.1",
+    "copy-webpack-plugin": "^13.0.0",
     "crypto-browserify": "^3.12.0",
     "history": "^5.3.0",
+    "leaflet": "^1.9.4",
     "path": "^0.12.7",
     "process": "^0.11.10",
     "prop-types": "^15.8.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.0.0-rc.1",
+    "react-dom": "19.0.0-rc.1",
+    "react-leaflet": "5.0.0-rc.2",
     "react-portal": "^4.2.2",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
+    "react-simple-maps": "^3.0.0",
     "react-transition-group": "^4.4.5",
     "stream-browserify": "^3.0.0"
   }
