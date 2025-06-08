@@ -8,6 +8,7 @@ import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import AppLayout from './AppLayout'
+import { AppBarProvider } from './Providers/AppBarProvider'
 
 const theme = createTheme({
   components: {
@@ -34,10 +35,12 @@ const theme = createTheme({
 const container = document.getElementById('app')
 const root = createRoot(container)
 root.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Router>
-      <AppLayout />
-    </Router>
-  </ThemeProvider>
+  <AppBarProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <AppLayout />
+      </Router>
+    </ThemeProvider>
+  </AppBarProvider>
 )
