@@ -1,8 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Stack, Typography, Button } from '@mui/material'
-import { AppSettingsAlt as SettingsIcon } from '@mui/icons-material'
-import Map from './MapView'
+import { Stack, Button } from '@mui/material'
 
 const ReisenOverview = () => {
   const navigate = useNavigate()
@@ -13,22 +11,13 @@ const ReisenOverview = () => {
       justifyContent="start"
       alignItems="center"
     >
-      <Typography
-        variant="h4"
-      >
-        ReisenOverview
-      </Typography>
       <Stack
-        width="100%"
+        width="90%"
         height="20%"
+        rowGap="10px"
       >
-        <Map />
-        <Button
-          variant="contained"
-          startIcon={<SettingsIcon />}
-          onClick={() => navigate('/reisen/map')}
-        >
-          Go to Map
+        <Button onClick={() => navigate('/reisen/map')} style={{ border: 'none', background: 'none', padding: 0 }}>
+          <img src="/assets/map_preview.png" alt="Map preview" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </Button>
       </Stack>
     </Stack>

@@ -16,13 +16,16 @@ import ImpfpassOverview from './Pages/Impfpass/ImpfpassOverview'
 import Profile from './Pages/Profile/Profile'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
 import ProfileSettings from './Pages/Profile/ProfileSettings'
+import Splash from './Pages/Splash/Splash'
 
 import Error404 from './Pages/Error404'
 
 const AppRoutes = () => (
   <Routes>
 
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<Splash />} />
+
+    <Route path="/home" element={<Home />} />
 
     <Route path="/first_home" element={<FirstTimeHome />} />
 
