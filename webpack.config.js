@@ -7,6 +7,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 const require = createRequire(import.meta.url)
 const __filename = fileURLToPath(import.meta.url)
@@ -15,6 +16,11 @@ const __dirname = path.dirname(__filename)
 const pkg = require('./package.json')
 
 const plugins = [
+  new CopyWebpackPlugin({
+    patterns: [
+      { from: './src/assets', to: './assets' }
+    ]
+  }),
   new webpack.EnvironmentPlugin(['NODE_ENV']),
   new webpack.ProvidePlugin({
     process: 'process/browser.js',

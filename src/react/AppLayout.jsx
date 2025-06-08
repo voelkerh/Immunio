@@ -12,24 +12,24 @@ import {
 } from '@mui/material'
 
 import {
-  HealthAndSafety as HomeIcon,
-  Pets as CatIcon,
-  Person4 as ProfileIcon
+  Home as HomeIcon,
+  ImportContacts as ImpfpassIcon,
+  Flight as ReisenIcon
 } from '@mui/icons-material'
 
 import AppRoutes from './AppRoutes'
 
 import AppLogo from '../assets/favicon.svg'
 
-const borderRadius = 6
+const borderRadius = 4
 
 const AppLayout = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
   let navigationIndex = 0
-  if (location.pathname.startsWith('/catnames')) navigationIndex = 1
-  if (location.pathname.startsWith('/profile')) navigationIndex = 2
+  if (location.pathname.startsWith('/impfpass')) navigationIndex = 1
+  if (location.pathname.startsWith('/reisen')) navigationIndex = 2
 
   return (
     <Stack
@@ -107,14 +107,14 @@ const AppLayout = () => {
                 onClick={() => navigate('/')}
               />
               <BottomNavigationAction
-                label="Cat Names"
-                icon={<CatIcon />}
-                onClick={() => navigate('/catnames')}
+                label="Impfpass"
+                icon={<ImpfpassIcon />}
+                onClick={() => navigate('/impfpass')}
               />
               <BottomNavigationAction
-                label="Profile"
-                icon={<ProfileIcon />}
-                onClick={() => navigate('/profile')}
+                label="Reisen"
+                icon={<ReisenIcon />}
+                onClick={() => navigate('/reisen')}
               />
             </BottomNavigation>
           </Stack>
