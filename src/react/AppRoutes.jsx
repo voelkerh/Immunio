@@ -6,8 +6,6 @@ import Home from './Pages/Home'
 
 import FirstTimeHome from './Pages/FirstTimeHome'
 
-import CreatePerson from './Pages/Datenaufnahme/CreatePerson'
-
 import MapView from './Pages/Reisen/MapView'
 import Reisen from './Pages/Reisen/Reisen'
 import ReisenOverview from './Pages/Reisen/ReisenOverview'
@@ -18,17 +16,18 @@ import ImpfpassOverview from './Pages/Impfpass/ImpfpassOverview'
 import Profile from './Pages/Profile/Profile'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
 import ProfileSettings from './Pages/Profile/ProfileSettings'
+import Splash from './Pages/Splash/Splash'
 
 import Error404 from './Pages/Error404'
 
 const AppRoutes = () => (
   <Routes>
 
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<Splash />} />
+
+    <Route path="/home" element={<Home />} />
 
     <Route path="/first_home" element={<FirstTimeHome />} />
-
-    <Route path="/create_person" element={<CreatePerson />} />
 
     <Route path="/profile" element={<Profile />}>
       <Route path="" element={<ProfileOverview />} />
