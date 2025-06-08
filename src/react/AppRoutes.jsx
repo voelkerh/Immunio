@@ -6,8 +6,6 @@ import Home from './Pages/Home'
 
 import FirstTimeHome from './Pages/FirstTimeHome'
 
-import CreatePerson from './Pages/Datenaufnahme/CreatePerson'
-
 import MapView from './Pages/Reisen/MapView'
 import Reisen from './Pages/Reisen/Reisen'
 import ReisenOverview from './Pages/Reisen/ReisenOverview'
@@ -27,8 +25,6 @@ const AppRoutes = () => (
     <Route path="/" element={<Home />} />
 
     <Route path="/first_home" element={<FirstTimeHome />} />
-
-    <Route path="/create_person" element={<CreatePerson />} />
 
     <Route path="/profile" element={<Profile />}>
       <Route path="" element={<ProfileOverview />} />
