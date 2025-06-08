@@ -31,7 +31,7 @@ const AppRoutes = () => (
 
     <Route path="/first_home" element={<FirstTimeHome />} />
 
-    <Route path="/create_person" elemtn={<CreatePerson />} />
+    <Route path="/create_person" element={<CreatePerson />} />
 
     <Route path="/profile" element={<Profile />}>
       <Route path="" element={<ProfileOverview />} />
