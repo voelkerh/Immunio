@@ -18,7 +18,7 @@ import {
 } from '@mui/icons-material'
 
 import AppRoutes from './AppRoutes'
-
+import CustomAppBar from './Components/CustomAppBar'
 import AppLogo from '../assets/favicon.svg'
 
 const borderRadius = 4
@@ -95,6 +95,7 @@ const AppLayout = () => {
               background: theme => theme.palette.background.paper
             }}
           >
+            <CustomAppBar />
             <AppRoutes />
             {location.pathname !== '/' && (
               <BottomNavigation
@@ -105,7 +106,7 @@ const AppLayout = () => {
                 <BottomNavigationAction
                   label="Home"
                   icon={<HomeIcon />}
-                  onClick={() => navigate('/')}
+                  onClick={() => navigate('/home')}
                 />
                 <BottomNavigationAction
                   label="Impfpass"
