@@ -100,7 +100,7 @@ const AppLayout = () => {
           >
             <CustomAppBar />
             <AppRoutes />
-            {location.pathname !== '/' && (
+            {showBottomNav && (
               <BottomNavigation
                 showLabels
                 value={navigationIndex}
