@@ -96,27 +96,29 @@ const AppLayout = () => {
             }}
           >
             <AppRoutes />
-            <BottomNavigation
-              showLabels
-              value={navigationIndex}
-              sx={{ width: '100%' }}
-            >
-              <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon />}
-                onClick={() => navigate('/')}
-              />
-              <BottomNavigationAction
-                label="Impfpass"
-                icon={<ImpfpassIcon />}
-                onClick={() => navigate('/impfpass')}
-              />
-              <BottomNavigationAction
-                label="Reisen"
-                icon={<ReisenIcon />}
-                onClick={() => navigate('/reisen')}
-              />
-            </BottomNavigation>
+            {location.pathname !== '/' && (
+              <BottomNavigation
+                showLabels
+                value={navigationIndex}
+                sx={{ width: '100%' }}
+              >
+                <BottomNavigationAction
+                  label="Home"
+                  icon={<HomeIcon />}
+                  onClick={() => navigate('/')}
+                />
+                <BottomNavigationAction
+                  label="Impfpass"
+                  icon={<ImpfpassIcon />}
+                  onClick={() => navigate('/impfpass')}
+                />
+                <BottomNavigationAction
+                  label="Reisen"
+                  icon={<ReisenIcon />}
+                  onClick={() => navigate('/reisen')}
+                />
+              </BottomNavigation>
+            )}
           </Stack>
         </Paper>
       </Container>
