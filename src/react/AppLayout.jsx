@@ -31,6 +31,9 @@ const AppLayout = () => {
   if (location.pathname.startsWith('/impfpass')) navigationIndex = 1
   if (location.pathname.startsWith('/reisen')) navigationIndex = 2
 
+  const pathsToHideBottomNav = ['/', '/first_home']
+  const showBottomNav = !pathsToHideBottomNav.includes(location.pathname)
+
   return (
     <Stack
       direction="row"
@@ -96,6 +99,7 @@ const AppLayout = () => {
             }}
           >
             <AppRoutes />
+            {showBottomNav && (
             <BottomNavigation
               showLabels
               value={navigationIndex}
@@ -117,6 +121,7 @@ const AppLayout = () => {
                 onClick={() => navigate('/reisen')}
               />
             </BottomNavigation>
+            )}
           </Stack>
         </Paper>
       </Container>
