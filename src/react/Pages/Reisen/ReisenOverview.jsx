@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { Stack, Button } from '@mui/material'
+import { Settings } from '@mui/icons-material'
+
+import { useAppBar } from '../../Providers/AppBarProvider'
 
 const ReisenOverview = () => {
   const navigate = useNavigate()
+
+  const { setConfig } = useAppBar()
+
+  useEffect(() => {
+    setConfig({
+      showBackButton: true,
+      backPath: '/profile/settings',
+      icon: <Settings />,
+      title: 'Reisen'
+    })
+  }, [])
 
   return (
     <Stack

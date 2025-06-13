@@ -22,8 +22,9 @@ const MapView = () => {
     <Stack
       flex="1 1 auto"
       width="100%"
-      justifyContent="center"
-      alignItems="center"
+      height="100%"
+      justifyContent="start"
+      alignItems="start"
     >
       <Map />
     </Stack>

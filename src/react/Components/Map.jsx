@@ -6,8 +6,7 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const getStyle = (feature) => {
-  // eslint-disable-next-line prefer-destructuring
-  const status = feature.properties.status
+  const { status } = feature.properties
   return {
     color: '#000',
     weight: 2,
@@ -40,7 +39,7 @@ const Map = () => {
   }
 
   return (
-    <MapContainer center={[51.1657, 10.4515]} zoom={3} style={{ height: '100%', width: '100%' }}>
+    <MapContainer center={[51.1657, 10.4515]} worldCopyJump zoom={3} style={{ height: '100%', width: '100%' }}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

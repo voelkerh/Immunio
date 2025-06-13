@@ -34,6 +34,9 @@ const AppLayout = () => {
   const pathsToHideBottomNav = ['/', '/first_home', '/create_person']
   const showBottomNav = !pathsToHideBottomNav.includes(location.pathname)
 
+  const pathsToHideTopAppBar = ['/', '/first_home', '/create_person']
+  const showTopAppBar = !pathsToHideTopAppBar.includes(location.pathname)
+
   return (
     <Stack
       direction="row"
@@ -98,7 +101,9 @@ const AppLayout = () => {
               background: theme => theme.palette.background.paper
             }}
           >
-            <CustomAppBar />
+            {showTopAppBar && (
+              <CustomAppBar />
+            )}
             <AppRoutes />
             {showBottomNav && (
               <BottomNavigation
