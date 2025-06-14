@@ -10,7 +10,9 @@ export const PersonProvider = ({ children }) => {
     birthdate: '',
     gender: '',
     riskGroup: '',
-    isPregnant: false
+    isPregnant: false,
+    vaccinations: [],
+    travelVaccinations: []
   })
 
   return (
