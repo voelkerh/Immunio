@@ -7,6 +7,7 @@ import { Settings } from '@mui/icons-material'
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
 
+/* Implement logic to base list items on person.vaccinations / person.travelVaccinations here */
 const generate = (element) => [0, 1, 2].map((value) => React.cloneElement(element, {
   key: value
 }),)
