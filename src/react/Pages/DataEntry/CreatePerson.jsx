@@ -1,11 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import { Stack, Checkbox, FormControlLabel, FormGroup, Typography, Button, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 
+import { usePerson } from '../../Providers/PersonProvider'
+
 const CreatePerson = () => {
+  const navigate = useNavigate()
+
   const [name, setName] = React.useState('')
   const [birthdate, setBirthdate] = React.useState('')
   const [gender, setGender] = React.useState('')
   const [riskGroup, setRiskGroup] = React.useState('')
+  const { setPerson } = usePerson()
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleBirthdateChange = (event) => setBirthdate(event.target.value)
@@ -15,7 +21,12 @@ const CreatePerson = () => {
   const isFormValid = name && birthdate && gender
 
   return (
-    <Stack id="pageTitle" flex="1 1 auto" justifyContent="center" alignItems="center">
+    <Stack
+      id="pageTitle"
+      flex="1 1 auto"
+      justifyContent="center"
+      alignItems="center"
+    >
       {/* Page Title */}
       <Stack alignItems="center">
         <Typography variant="h4" mt={5}>
@@ -23,16 +34,34 @@ const CreatePerson = () => {
         </Typography>
       </Stack>
       {/* Form Fields */}
-      <Stack id="formFields" alignItems="center" width="100%">
+      <Stack
+        id="formFields"
+        alignItems="center"
+        width="100%"
+      >
         <Stack width="100%" mt={5}>
-          <TextField label="Name" variant="outlined" value={name} onChange={handleNameChange} />
+          <TextField
+            required
+            label="Name"
+            variant="outlined"
+            value={name}
+            onChange={handleNameChange}
+          />
         </Stack>
         <Stack width="100%" mt={5}>
-          <TextField label="Geburtstdatum" variant="outlined" value={birthdate} onChange={handleBirthdateChange} />
+          <TextField
+            required
+            slotProps={{ inputLabel: { shrink: true } }}
+            label="Geburtstdatum"
+            type="date"
+            variant="outlined"
+            value={birthdate}
+            onChange={handleBirthdateChange}
+          />
         </Stack>
         <Stack width="100%" mt={5}>
           <FormControl fullWidth>
-            <InputLabel id="select-gender-label">Geschlecht</InputLabel>
+            <InputLabel required id="select-gender-label">Geschlecht</InputLabel>
             <Select
               labelId="select-gender-label"
               id="select-gender"
@@ -61,13 +90,15 @@ const CreatePerson = () => {
               <MenuItem value="A">A</MenuItem>
               <MenuItem value="B">B</MenuItem>
               <MenuItem value="C">C</MenuItem>
-
             </Select>
           </FormControl>
         </Stack>
         <Stack width="100%" mt={5}>
           <FormGroup>
-            <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }} />} label="Schwangerschaft" />
+            <FormControlLabel
+              control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }} />}
+              label="Schwangerschaft"
+            />
           </FormGroup>
         </Stack>
       </Stack>
@@ -85,8 +116,11 @@ const CreatePerson = () => {
           variant="outlined"
           size="large"
           sx={{ mt: 0, width: '50%', height: '5rem' }}
-          href="/home"
           disabled={!isFormValid}
+          onClick={() => {
+            setPerson({ name, birthdate, gender, riskGroup })
+            navigate('/home')
+          }}
         >
           Home
         </Button>
