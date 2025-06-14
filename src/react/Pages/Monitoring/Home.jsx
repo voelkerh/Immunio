@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { Stack, Typography, Divider, List, ListItem, ListItemText } from '@mui/material'
 import { Settings } from '@mui/icons-material'
 
-import { useAppBar } from '../Providers/AppBarProvider'
+import { useAppBar } from '../../Providers/AppBarProvider'
 
 function generate(element) {
   return [0, 1, 2].map((value) => React.cloneElement(element, {
