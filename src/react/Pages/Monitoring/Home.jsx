@@ -5,16 +5,20 @@ import { Stack, Typography, Divider, List, ListItem, ListItemText } from '@mui/m
 import { Settings } from '@mui/icons-material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
+import { usePerson } from '../../Providers/PersonProvider'
 
-function generate(element) {
-  return [0, 1, 2].map((value) => React.cloneElement(element, {
-    key: value
-  }),)
-}
+const generate = (element) => [0, 1, 2].map((value) => React.cloneElement(element, {
+  key: value
+}),)
+
+/* Implement monitoring logic based on person.vaccinations here */
+const isVaccinationComplete = (vaccinations) => 'Unvollständig'
 
 const Home = () => {
   const navigate = useNavigate()
   const { setConfig } = useAppBar()
+  const { person } = usePerson()
+  const vaccinationStatus = isVaccinationComplete(person.vaccinations || [])
 
   useEffect(() => {
     setConfig({
@@ -40,10 +44,10 @@ const Home = () => {
         spacing={4}
       >
         <Typography variant="h4">
-          Name
+          {person.name}
         </Typography>
         <Typography variant="h4">
-          Geburtsdatum
+          {person.birthdate}
         </Typography>
       </Stack>
       <Divider sx={dividerSx} />
@@ -55,7 +59,7 @@ const Home = () => {
           Impfstatus:
         </Typography>
         <Typography variant="h5">
-          Un/vollständig
+          {vaccinationStatus}
         </Typography>
       </Stack>
       <Divider sx={dividerSx}>Offene Schutzimpfungen</Divider>
