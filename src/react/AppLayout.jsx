@@ -28,8 +28,8 @@ const AppLayout = () => {
   const navigate = useNavigate()
 
   let navigationIndex = 0
-  if (location.pathname.startsWith('/impfpass')) navigationIndex = 1
-  if (location.pathname.startsWith('/reisen')) navigationIndex = 2
+  if (location.pathname.startsWith('/vaccinationCertificate')) navigationIndex = 1
+  if (location.pathname.startsWith('/travel')) navigationIndex = 2
 
   const pathsToHideBottomNav = ['/', '/first_home', '/create_person']
   const showBottomNav = !pathsToHideBottomNav.includes(location.pathname)
@@ -119,12 +119,12 @@ const AppLayout = () => {
                 <BottomNavigationAction
                   label="Impfpass"
                   icon={<ImpfpassIcon />}
-                  onClick={() => navigate('/impfpass')}
+                  onClick={() => navigate('/vaccinationCertificate')}
                 />
                 <BottomNavigationAction
                   label="Reisen"
                   icon={<ReisenIcon />}
-                  onClick={() => navigate('/reisen')}
+                  onClick={() => navigate('/travel')}
                 />
               </BottomNavigation>
             )}

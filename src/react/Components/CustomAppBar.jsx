@@ -23,7 +23,11 @@ const CustomAppBar = () => {
             {config.icon}
           </IconButton>
         )}
-        <Typography variant="h6" color="inherit" component="div">
+        <Typography
+          variant="h6"
+          color="inherit"
+          component="div"
+        >
           {config.title}
         </Typography>
       </Toolbar>

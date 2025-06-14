@@ -2,18 +2,18 @@ import React from 'react'
 
 import { Route, Routes } from 'react-router-dom'
 
-import Home from './Pages/Home'
+import Home from './Pages/Monitoring/Home'
 
-import FirstTimeHome from './Pages/FirstTimeHome'
+import FirstTimeHome from './Pages/DataEntry/FirstTimeHome'
 
-import CreatePerson from './Pages/Datenaufnahme/CreatePerson'
+import CreatePerson from './Pages/DataEntry/CreatePerson'
 
-import MapView from './Pages/Reisen/MapView'
-import Reisen from './Pages/Reisen/Reisen'
-import ReisenOverview from './Pages/Reisen/ReisenOverview'
+import MapView from './Pages/Travel/MapView'
+import Travel from './Pages/Travel/Travel'
+import TravelOverview from './Pages/Travel/TravelOverview'
 
-import Impfpass from './Pages/Impfpass/Impfpass'
-import ImpfpassOverview from './Pages/Impfpass/ImpfpassOverview'
+import VaccinationCertificate from './Pages/VaccinationCertificate/VaccinationCertificate'
+import VaccinationCertificateOverview from './Pages/VaccinationCertificate/VaccinationCertificateOverview'
 
 import Profile from './Pages/Profile/Profile'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
@@ -38,13 +38,13 @@ const AppRoutes = () => (
       <Route path="settings" element={<ProfileSettings />} />
     </Route>
 
-    <Route path="/impfpass" element={<Impfpass />}>
-      <Route path="" element={<ImpfpassOverview />} />
+    <Route path="/vaccinationCertificate" element={<VaccinationCertificate />}>
+      <Route path="" element={<VaccinationCertificateOverview />} />
 
     </Route>
 
-    <Route path="/reisen" element={<Reisen />}>
-      <Route path="" element={<ReisenOverview />} />
+    <Route path="/travel" element={<Travel />}>
+      <Route path="" element={<TravelOverview />} />
       <Route path="map" element={<MapView />} />
     </Route>
 

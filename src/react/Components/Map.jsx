@@ -39,13 +39,22 @@ const Map = () => {
   }
 
   return (
-    <MapContainer center={[51.1657, 10.4515]} worldCopyJump zoom={3} style={{ height: '100%', width: '100%' }}>
+    <MapContainer
+      center={[51.1657, 10.4515]}
+      worldCopyJump
+      zoom={3}
+      style={{ height: '100%', width: '100%' }}
+    >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {geoData && (
-        <GeoJSON data={geoData} style={getStyle} onEachFeature={onEachCountry} />
+        <GeoJSON
+          data={geoData}
+          style={getStyle}
+          onEachFeature={onEachCountry}
+        />
       )}
     </MapContainer>
   )

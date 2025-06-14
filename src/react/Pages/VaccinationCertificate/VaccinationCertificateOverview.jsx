@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Stack, Button } from '@mui/material'
 import { AppSettingsAlt as SettingsIcon } from '@mui/icons-material'
 
-const ImpfpassOverview = () => {
+const VaccinationCertificateOverview = () => {
   const navigate = useNavigate()
 
   return (
@@ -27,4 +27,4 @@ const ImpfpassOverview = () => {
   )
 }
 
-export default ImpfpassOverview
+export default VaccinationCertificateOverview
