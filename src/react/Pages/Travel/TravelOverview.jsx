@@ -5,10 +5,7 @@ import { Stack, Button, Divider, List, ListItem, ListItemText } from '@mui/mater
 import { Settings } from '@mui/icons-material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
-
-const generate = (element) => [0, 1, 2].map((value) => React.cloneElement(element, {
-  key: value
-}),)
+import { usePerson } from '../../Providers/PersonProvider'
 
 const TravelOverview = () => {
   const navigate = useNavigate()
@@ -27,6 +24,8 @@ const TravelOverview = () => {
       title: 'Reisen'
     })
   }, [])
+
+  const { person } = usePerson()
 
   return (
     <Stack
@@ -52,17 +51,14 @@ const TravelOverview = () => {
         </Button>
         <Divider sx={dividerSx}>Geplante Reisen</Divider>
         <List sx={listSx}>
-          {generate(
-            <ListItem sx={listItemSx}>
+          {person.plannedTrips?.map((trip, index) => (
+            <ListItem key={index} sx={listItemSx}>
               <ListItemText
-                primary="Land"
-                secondary="Abfahrt"
-                onClick={() => {
-                  navigate('*')
-                }}
+                primary={trip.country.charAt(0).toUpperCase() + trip.country.slice(1).toLowerCase()}
+                secondary={trip.date}
               />
-            </ListItem>,
-          )}
+            </ListItem>
+          ))}
         </List>
         <Button
           variant="contained"
