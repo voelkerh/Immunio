@@ -34,17 +34,16 @@ const AppRoutes = () => (
     <Route path="/create_person" element={<CreatePerson />} />
 
     <Route path="/profile" element={<Profile />}>
-      <Route path="" element={<ProfileOverview />} />
+      <Route index element={<ProfileOverview />} />
       <Route path="settings" element={<ProfileSettings />} />
     </Route>
 
     <Route path="/vaccinationCertificate" element={<VaccinationCertificate />}>
-      <Route path="" element={<VaccinationCertificateOverview />} />
-
+      <Route index element={<VaccinationCertificateOverview />} />
     </Route>
 
     <Route path="/travel" element={<Travel />}>
-      <Route path="" element={<TravelOverview />} />
+      <Route index element={<TravelOverview />} />
       <Route path="map" element={<MapView />} />
     </Route>
 
