@@ -11,6 +11,7 @@ import CreatePerson from './Pages/DataEntry/CreatePerson'
 import MapView from './Pages/Travel/MapView'
 import Travel from './Pages/Travel/Travel'
 import TravelOverview from './Pages/Travel/TravelOverview'
+import CountryView from './Pages/Travel/CountryView'
 
 import VaccinationCertificate from './Pages/VaccinationCertificate/VaccinationCertificate'
 import VaccinationCertificateOverview from './Pages/VaccinationCertificate/VaccinationCertificateOverview'
@@ -45,6 +46,7 @@ const AppRoutes = () => (
     <Route path="/travel" element={<Travel />}>
       <Route index element={<TravelOverview />} />
       <Route path="map" element={<MapView />} />
+      <Route path="country/:name" element={<CountryView />} />
     </Route>
 
     <Route path="*" element={<Error404 />} />
