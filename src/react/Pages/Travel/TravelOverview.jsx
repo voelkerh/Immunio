@@ -32,7 +32,7 @@ const TravelOverview = () => {
         rowGap="10px"
       >
         <Button
-          onClick={() => navigate('/reisen/map')}
+          onClick={() => navigate('/travel/map')}
           style={{ border: 'none', background: 'none', padding: 0 }}
         >
           <img
