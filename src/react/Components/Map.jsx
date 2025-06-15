@@ -28,7 +28,7 @@ const Map = () => {
   }, [])
 
   const handleCountryClick = (countryName) => {
-    navigate(`/country/${countryName}`)
+    navigate(`/travel/country/${countryName}`)
   }
 
   const onEachCountry = (feature, layer) => {
