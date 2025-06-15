@@ -12,7 +12,7 @@ const MapView = () => {
   useEffect(() => {
     setConfig({
       showBackButton: true,
-      backPath: '/reisen',
+      backPath: '/travel',
       icon: <ArrowBack />,
       title: 'Reisen'
     })
