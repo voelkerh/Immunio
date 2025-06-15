@@ -32,7 +32,7 @@ const Map = () => {
   }
 
   const onEachCountry = (feature, layer) => {
-    const name = feature.properties.ADMIN || feature.properties.name
+    const name = feature.properties.NAME_EN || feature.properties.name
     layer.on({
       click: () => handleCountryClick(name)
     })
