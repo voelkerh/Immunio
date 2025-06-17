@@ -15,7 +15,13 @@ export const PersonProvider = ({ children }) => {
     riskGroup: '',
     isPregnant: false,
     vaccinations: [],
-    travelVaccinations: []
+    travelVaccinations: [],
+    plannedTrips: [
+      {
+        country: 'france',
+        date: '2025-08-01'
+      }
+    ]
   })
 
   return (

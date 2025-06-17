@@ -72,7 +72,7 @@ const AppLayout = () => {
             }}
           />
           <Typography variant="h5">
-            My Mobile Health App
+            Immunio - Impfmonitoring
           </Typography>
         </Stack>
         <Paper
