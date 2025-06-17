@@ -106,6 +106,7 @@
     "react-router-dom": "^6.26.1",
     "react-simple-maps": "^3.0.0",
     "react-transition-group": "^4.4.5",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "webpack-pwa-manifest": "^4.3.0"
   }
 }

@@ -8,6 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import WebpackPwaManifest from 'webpack-pwa-manifest'
 
 const require = createRequire(import.meta.url)
 const __filename = fileURLToPath(import.meta.url)
@@ -55,6 +56,21 @@ const plugins = [
         // windows: true // Create Windows 8 tile icons. `boolean` or `{ offset, background }` or an array of sources
       }
     }
+  }),
+  new WebpackPwaManifest({
+    filename: 'app.webmanifest',
+    name: 'immunio.',
+    short_name: 'immunio',
+    display: 'standalone',
+    background_color: '#fff',
+    theme_color: '#333',
+    icons: [
+      {
+        src: path.resolve(__dirname, 'src/assets/favicon.svg'),
+        sizes: [96, 128, 192, 256, 384, 512],
+        purpose: 'any maskable'
+      }
+    ]
   })
 ]
 
