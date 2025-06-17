@@ -12,7 +12,7 @@ const VaccinationCertificate = () => {
   useEffect(() => {
     setConfig({
       showBackButton: true,
-      backPath: '/profile/settings',
+      backPath: '/settings',
       icon: <Settings />,
       title: 'Impfpass'
     })

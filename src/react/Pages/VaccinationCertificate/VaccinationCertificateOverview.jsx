@@ -19,7 +19,7 @@ const VaccinationCertificateOverview = () => {
       <Button
         variant="contained"
         startIcon={<SettingsIcon />}
-        onClick={() => navigate('/profile/settings')}
+        onClick={() => navigate('/settings')}
       >
         Go to Settings
       </Button>
