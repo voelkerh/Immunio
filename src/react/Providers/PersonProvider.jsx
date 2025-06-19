@@ -15,7 +15,7 @@ export const PersonProvider = ({ children }) => {
     riskGroup: '',
     isPregnant: false,
     vaccinations: [
-      { id: 0, category: 'gelbfieber', name: 'Gelbfieverimpfung 1', date: '22.02.2022' },
+      { id: 0, category: 'gelbfieber', name: 'Gelbfieberimpfung 1', date: '22.02.2022' },
       { id: 1, category: 'schutzimpfung', name: 'Schutzimpfung 1', date: '22.02.2022' },
       { id: 2, category: 'schutzimpfung', name: 'Schmutzimpfung 2', date: '22.02.2022' },
       { id: 3, category: 'gelbfieber', name: 'Gelbfieverimpfung 2', date: '22.02.2022' },
