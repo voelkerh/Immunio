@@ -16,8 +16,6 @@ import CountryView from './Pages/Travel/CountryView'
 import VaccinationCertificate from './Pages/VaccinationCertificate/VaccinationCertificate'
 import VaccinationCertificateOverview from './Pages/VaccinationCertificate/VaccinationCertificateOverview'
 
-import Profile from './Pages/Profile/Profile'
-import ProfileOverview from './Pages/Profile/ProfileOverview'
 import ProfileSettings from './Pages/Profile/ProfileSettings'
 import Splash from './Pages/Splash/Splash'
 
@@ -34,10 +32,7 @@ const AppRoutes = () => (
 
     <Route path="/create_person" element={<CreatePerson />} />
 
-    <Route path="/profile" element={<Profile />}>
-      <Route index element={<ProfileOverview />} />
-      <Route path="settings" element={<ProfileSettings />} />
-    </Route>
+    <Route path="/settings" element={<ProfileSettings />} />
 
     <Route path="/vaccinationCertificate" element={<VaccinationCertificate />}>
       <Route index element={<VaccinationCertificateOverview />} />
