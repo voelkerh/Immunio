@@ -13,7 +13,6 @@ import Travel from './Pages/Travel/Travel'
 import TravelOverview from './Pages/Travel/TravelOverview'
 import CountryView from './Pages/Travel/CountryView'
 
-import VaccinationCertificate from './Pages/VaccinationCertificate/VaccinationCertificate'
 import VaccinationCertificateOverview from './Pages/VaccinationCertificate/VaccinationCertificateOverview'
 
 import ProfileSettings from './Pages/Profile/ProfileSettings'
@@ -34,9 +33,7 @@ const AppRoutes = () => (
 
     <Route path="/settings" element={<ProfileSettings />} />
 
-    <Route path="/vaccinationCertificate" element={<VaccinationCertificate />}>
-      <Route index element={<VaccinationCertificateOverview />} />
-    </Route>
+    <Route path="/vaccinations" element={<VaccinationCertificateOverview />} />
 
     <Route path="/travel" element={<Travel />}>
       <Route index element={<TravelOverview />} />
