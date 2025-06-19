@@ -18,7 +18,7 @@ const VaccinationCertificateOverview = () => {
   useEffect(() => {
     setConfig({
       showBackButton: true,
-      backPath: '/profile/settings',
+      backPath: '/settings',
       icon: <Settings />,
       title: 'Impfpass'
     })
@@ -27,15 +27,15 @@ const VaccinationCertificateOverview = () => {
   const renderVaccinations = (category) => {
     const items = person.vaccinations
       .filter(v => v.category === category)
-      .map(v => (
+      .map(vaccination => (
         <ListItem
-          key={v.id}
+          key={vaccination.id}
           sx={listItemSx}
           button
         >
           <ListItemText
-            primary={v.name}
-            secondary={v.date}
+            primary={vaccination.name}
+            secondary={vaccination.date}
           />
         </ListItem>
       ))
