@@ -25,7 +25,7 @@ const CountryView = () => {
       title: 'Reisen'
     })
   }, [])
-
+  //if name == myanmar -> burma
   const recommendations = travelData[name.toLowerCase().replaceAll(' ', '-')]
 
   return (
