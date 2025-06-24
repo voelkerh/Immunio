@@ -54,7 +54,7 @@ const CountryView = () => {
       </List>
       <Button
         variant="contained"
-        onClick={() => navigate('/travel/map')}
+        onClick={() => navigate('/travel/date')}
       >
         Reise hinzufügen
       </Button>
