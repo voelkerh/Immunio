@@ -6,12 +6,16 @@ import { ArrowBack } from '@mui/icons-material'
 import { Typography, Button, Divider, List, ListItem, ListItemText } from '@mui/material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
+import { usePerson } from '../../Providers/PersonProvider'
 
 import travelData from '../../../assets/travel_vaccinations.json'
 
 const CountryView = () => {
   const { name } = useParams()
   const { setConfig } = useAppBar()
+
+  const { person, setPerson } = usePerson()
+
   const navigate = useNavigate()
 
   const dividerSx = { width: '100%', my: 2 }
@@ -28,6 +32,14 @@ const CountryView = () => {
   }, [])
 
   const recommendations = travelData[name.toLowerCase().replaceAll(' ', '-')]
+  const saveAndNext = () => {
+    console.log('prev', person)
+    setPerson(prev => ({
+      ...prev, // ... immutable / copy of person
+      plannedTrips: [...prev.plannedTrips, { country: name }]
+    }))
+    navigate('/travel/date')
+  }
 
   return (
     <Stack
@@ -54,7 +66,7 @@ const CountryView = () => {
       </List>
       <Button
         variant="contained"
-        onClick={() => navigate('/travel/date')}
+        onClick={saveAndNext}
       >
         Reise hinzufügen
       </Button>
