@@ -28,7 +28,8 @@ export const PersonProvider = ({ children }) => {
     plannedTrips: [
       {
         country: 'france',
-        date: '2025-08-01'
+        startDate: '2025-08-01',
+        endDate: '2025-08-16'
       }
     ]
   })
