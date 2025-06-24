@@ -60,7 +60,7 @@ const TravelOverview = () => {
             <ListItem key={index} sx={listItemSx}>
               <ListItemText
                 primary={trip.country.charAt(0).toUpperCase() + trip.country.slice(1).toLowerCase()}
-                secondary={trip.date}
+                secondary={`${trip.startDate} - ${trip.endDate}`}
               />
             </ListItem>
           ))}
