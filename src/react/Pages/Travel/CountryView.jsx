@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import { Stack } from '@mui/system'
 import { ArrowBack } from '@mui/icons-material'
-import { Typography, Divider, List, ListItem, ListItemText } from '@mui/material'
+import { Typography, Button, Divider, List, ListItem, ListItemText } from '@mui/material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
 
@@ -12,6 +12,7 @@ import travelData from '../../../assets/travel_vaccinations.json'
 const CountryView = () => {
   const { name } = useParams()
   const { setConfig } = useAppBar()
+  const navigate = useNavigate()
 
   const dividerSx = { width: '100%', my: 2 }
   const listSx = { width: '100%' }
@@ -39,6 +40,10 @@ const CountryView = () => {
       <Typography variant="h4">
         {name}
       </Typography>
+      <Divider sx={dividerSx}>Impfstatus für eine Reise</Divider>
+      <Typography variant="h6">
+        Impfstatus un/genügend
+      </Typography>
       <Divider sx={dividerSx}>Empfohlene Impfungen</Divider>
       <List sx={listSx}>
         {recommendations?.map((vaccine) => (
@@ -47,6 +52,12 @@ const CountryView = () => {
           </ListItem>
         ))}
       </List>
+      <Button
+        variant="contained"
+        onClick={() => navigate('/travel/map')}
+      >
+        Reise hinzufügen
+      </Button>
     </Stack>
   )
 }
