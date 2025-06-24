@@ -38,7 +38,6 @@ const TravelOverview = () => {
         height="20%"
         rowGap="10px"
       >
-        <Divider sx={dividerSx}>Karte erkunden</Divider>
         <Button
           onClick={() => navigate('/travel/map')}
           style={{ border: 'none', background: 'none', padding: 0 }}
@@ -48,6 +47,12 @@ const TravelOverview = () => {
             alt="Map preview"
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => navigate('/travel/map')}
+        >
+          Reise hinzufügen
         </Button>
         <Divider sx={dividerSx}>Geplante Reisen</Divider>
         <List sx={listSx}>
@@ -60,12 +65,6 @@ const TravelOverview = () => {
             </ListItem>
           ))}
         </List>
-        <Button
-          variant="contained"
-          onClick={() => navigate('*')}
-        >
-          Reise hinzufügen
-        </Button>
       </Stack>
     </Stack>
   )
