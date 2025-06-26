@@ -8,9 +8,17 @@ import { useAppBar } from '../Providers/AppBarProvider'
 const CustomAppBar = () => {
   const { config } = useAppBar()
   const navigate = useNavigate()
-
+  const position = 'fixed'
   return (
-    <AppBar position="static">
+    <AppBar
+      position={position}
+      sx={{
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: theme => theme.zIndex.appBar
+      }}
+    >
       <Toolbar variant="dense">
         {config.showBackButton && (
           <IconButton

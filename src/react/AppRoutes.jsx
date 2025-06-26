@@ -23,7 +23,7 @@ import Error404 from './Pages/Error404'
 const AppRoutes = () => (
   <Routes>
 
-    <Route path="/" element={<Splash />} />
+    <Route path="/" element={<Splash debug />} />
 
     <Route path="/home" element={<Home />} />
 

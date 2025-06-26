@@ -38,111 +38,116 @@ const AppLayout = () => {
   const showTopAppBar = !pathsToHideTopAppBar.includes(location.pathname)
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="center"
+    <Container
       sx={{
-        width: '100%',
+        position: 'relative',
+        pt: '64px',
+        pb: '56px',
         height: '100%',
-        paddingTop: theme.spacing(5),
-        paddingBottom: theme.spacing(5)
+        display: 'flex',
+        flexDirection: 'column'
       }}
+      maxWidth="xs"
+      disableGutters
     >
-      <Container
-        maxWidth="xs"
-        disableGutters
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%'
-        }}
-      >
-        {!isMobile && (
+      {!isMobile && (
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          marginBottom={2}
+        >
+          <img
+            src={AppLogo}
+            alt="App Logo"
+            style={{
+              width: '40px',
+              height: '40px'
+            }}
+          />
+          <Typography variant="h5">
+            Immunio - Impfmonitoring
+          </Typography>
+        </Stack>
+      )}
+      {!isMobile ? (
+        <Paper
+          elevation={6}
+          sx={{
+            position: 'relative',
+            flex: '1 1 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            paddingTop: 2,
+            paddingRight: 1,
+            paddingBottom: 2,
+            paddingLeft: 1,
+            overflow: 'hidden',
+            maxHeight: '100%',
+            borderRadius: theme.spacing(borderRadius),
+            background: theme.palette.grey[900],
+            zIndex: 1
+          }}
+        >
           <Stack
-            direction="row"
+            flex="1 1 auto"
+            direction="column"
             justifyContent="center"
             alignItems="center"
-            marginBottom={2}
-          >
-            <img
-              src={AppLogo}
-              alt="App Logo"
-              style={{
-                width: '40px',
-                height: '40px'
-              }}
-            />
-            <Typography variant="h5">
-              Immunio - Impfmonitoring
-            </Typography>
-          </Stack>
-        )}
-        {!isMobile ? (
-          <Paper
-            elevation={6}
             sx={{
-              flex: '1 1 auto',
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: 2,
-              paddingRight: 1,
-              paddingBottom: 2,
-              paddingLeft: 1,
-              overflow: 'hidden',
+              overflow: 'auto',
+              pb: theme.spacing(10),
               borderRadius: theme.spacing(borderRadius),
-              background: theme.palette.grey[900]
+              background: theme.palette.background.paper,
+              zIndex: 2
             }}
           >
-            <Stack
-              flex="1 1 auto"
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                overflow: 'hidden',
-                borderRadius: theme.spacing(borderRadius),
-                background: theme.palette.background.paper
-              }}
-            >
-              {showTopAppBar && (
-                <CustomAppBar />
-              )}
-              <AppRoutes />
-              {showBottomNav && (
-                <BottomNavigation
-                  showLabels
-                  value={navigationIndex}
-                  sx={{ width: '100%' }}
-                >
-                  <BottomNavigationAction
-                    label="Home"
-                    icon={<HomeIcon />}
-                    onClick={() => navigate('/home')}
-                  />
-                  <BottomNavigationAction
-                    label="Impfpass"
-                    icon={<ImpfpassIcon />}
-                    onClick={() => navigate('/vaccinations')}
-                  />
-                  <BottomNavigationAction
-                    label="Reisen"
-                    icon={<ReisenIcon />}
-                    onClick={() => navigate('/travel')}
-                  />
-                </BottomNavigation>
-              )}
-            </Stack>
-          </Paper>
-        ) : (
-          // On mobile, just render the main content without Paper
-          <>
-            {showTopAppBar && <CustomAppBar />}
+            {showTopAppBar && (
+              <CustomAppBar position="sticky" />
+            )}
             <AppRoutes />
             {showBottomNav && (
+            <BottomNavigation
+              showLabels
+              value={navigationIndex}
+              sx={{
+                width: '100%',
+                position: 'absolute',
+                bottom: theme.spacing(2),
+                left: 0,
+                paddingBottom: 'env(safe-area-inset-bottom)',
+                zIndex: 5
+              }}
+            >
+              <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => navigate('/home')} />
+              <BottomNavigationAction label="Impfpass" icon={<ImpfpassIcon />} onClick={() => navigate('/vaccinations')} />
+              <BottomNavigationAction label="Reisen" icon={<ReisenIcon />} onClick={() => navigate('/travel')} />
+            </BottomNavigation>
+            )}
+          </Stack>
+        </Paper>
+      ) : (
+        // On mobile, just render the main content without Paper
+        <>
+          {showTopAppBar && <CustomAppBar />}
+          <AppRoutes />
+          {showBottomNav && (
+            <Container
+              sx={{
+                paddingBottom: '20px',
+                background: 'white',
+                position: 'fixed',
+                bottom: 0,
+                left: 0
+              }}
+              alignItems="start"
+            >
               <BottomNavigation
                 showLabels
                 value={navigationIndex}
-                sx={{ width: '100%' }}
+                sx={{
+                  width: '100%'
+                }}
               >
                 <BottomNavigationAction
                   label="Home"
@@ -160,11 +165,12 @@ const AppLayout = () => {
                   onClick={() => navigate('/travel')}
                 />
               </BottomNavigation>
-            )}
-          </>
-        )}
-      </Container>
-    </Stack>
+            </Container>
+          )}
+        </>
+      )}
+    </Container>
+
   )
 }
 
