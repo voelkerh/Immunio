@@ -85,8 +85,7 @@ const AppLayout = () => {
             overflow: 'hidden',
             maxHeight: '100%',
             borderRadius: theme.spacing(borderRadius),
-            background: theme.palette.grey[900],
-            zIndex: 1
+            background: theme.palette.grey[900]
           }}
         >
           <Stack
@@ -95,36 +94,36 @@ const AppLayout = () => {
             justifyContent="center"
             alignItems="center"
             sx={{
+              position: 'relative',
               overflow: 'auto',
               pb: theme.spacing(10),
               borderRadius: theme.spacing(borderRadius),
-              background: theme.palette.background.paper,
-              zIndex: 2
+              background: theme.palette.background.paper
             }}
           >
             {showTopAppBar && (
               <CustomAppBar position="sticky" />
             )}
             <AppRoutes />
-            {showBottomNav && (
+          </Stack>
+          {showBottomNav && (
             <BottomNavigation
               showLabels
               value={navigationIndex}
               sx={{
-                width: '100%',
+                width: 'calc(100% - 16px)',
                 position: 'absolute',
                 bottom: theme.spacing(2),
-                left: 0,
+                left: '8px',
                 paddingBottom: 'env(safe-area-inset-bottom)',
-                zIndex: 5
+                borderRadius: theme.spacing(1)
               }}
             >
               <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => navigate('/home')} />
               <BottomNavigationAction label="Impfpass" icon={<ImpfpassIcon />} onClick={() => navigate('/vaccinations')} />
               <BottomNavigationAction label="Reisen" icon={<ReisenIcon />} onClick={() => navigate('/travel')} />
             </BottomNavigation>
-            )}
-          </Stack>
+          )}
         </Paper>
       ) : (
         // On mobile, just render the main content without Paper
