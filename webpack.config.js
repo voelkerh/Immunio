@@ -8,6 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import { GenerateSW } from 'workbox-webpack-plugin'
 
 const require = createRequire(import.meta.url)
 const __filename = fileURLToPath(import.meta.url)
@@ -18,7 +19,8 @@ const pkg = require('./package.json')
 const plugins = [
   new CopyWebpackPlugin({
     patterns: [
-      { from: './src/assets', to: './assets' }
+      { from: './src/assets', to: './assets' },
+      { from: './manifest.json', to: './' }   // <-- manifest is at project root
     ]
   }),
   new webpack.EnvironmentPlugin(['NODE_ENV']),
@@ -32,6 +34,7 @@ const plugins = [
     TARGET: JSON.stringify('web')
   }),
   new HtmlWebpackPlugin({
+    template: './src/index.ejs',             // <-- use your index.ejs template
     inject: 'body',
     publicPath: '/'
   }),
@@ -45,16 +48,29 @@ const plugins = [
       appDescription: pkg.description,
       developerName: pkg.author,
       developerURL: null, // prevent retrieving from the nearest package.json
-      background: '#ddd',
-      theme_color: '#333',
+      background: '#ffffff',
+      theme_color: '#333333',
       icons: {
-        // android: true, // Create Android homescreen icon. `boolean` or `{ offset, background }` or an array of sources
-        // appleIcon: true, // Create Apple touch icons. `boolean` or `{ offset, background }` or an array of sources
-        // appleStartup: true, // Create Apple startup images. `boolean` or `{ offset, background }` or an array of sources
+        android: true, // Create Android homescreen icon. `boolean` or `{ offset, background }` or an array of sources
+        appleIcon: true, // Create Apple touch icons. `boolean` or `{ offset, background }` or an array of sources
         favicons: true, // Create regular favicons. `boolean` or `{ offset, background }` or an array of sources
-        // windows: true // Create Windows 8 tile icons. `boolean` or `{ offset, background }` or an array of sources
+        windows: true // Create Windows 8 tile icons. `boolean` or `{ offset, background }` or an array of sources
       }
     }
+  }),
+  new GenerateSW({
+    clientsClaim: true,
+    skipWaiting: true,
+    runtimeCaching: [
+      {
+        urlPattern: /\.(?:png|jpg|jpeg|svg|json)$/,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'static-resources',
+          expiration: { maxEntries: 60, maxAgeSeconds: 30 * 24 * 60 * 60 }
+        }
+      }
+    ]
   })
 ]
 
