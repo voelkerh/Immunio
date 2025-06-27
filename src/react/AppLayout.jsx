@@ -25,6 +25,8 @@ const AppLayout = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const theme = useTheme()
+
+  // check if the client is mobile
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   let navigationIndex = 0
@@ -38,6 +40,7 @@ const AppLayout = () => {
   const showTopAppBar = !pathsToHideTopAppBar.includes(location.pathname)
 
   return (
+    // container to wrap all content in regardless of mobile or desktop
     <Container
       sx={{
         position: 'relative',
@@ -51,6 +54,7 @@ const AppLayout = () => {
       disableGutters
     >
       {!isMobile && (
+        // if its desktop return components as before
         <Stack
           direction="row"
           justifyContent="center"
@@ -126,7 +130,7 @@ const AppLayout = () => {
           )}
         </Paper>
       ) : (
-        // On mobile, just render the main content without Paper
+        // On mobile, just render the main content without Paper and border
         <>
           {showTopAppBar && <CustomAppBar />}
           <AppRoutes />

@@ -10,6 +10,7 @@ import {
 const Splash = ({ debug }) => {
   const navigate = useNavigate()
 
+  // added debug option which redirects directly to home and turns of timeout.
   const url = debug ? '/home' : '/first_home'
   const timeoutMs = debug ? 1 : 1000
 

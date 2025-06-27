@@ -48,7 +48,10 @@ root.render(
   </AppBarProvider>
 )
 
-// register the Workbox‐generated service worker
+// register the Workbox‐generated service worker.
+// It tells the client to install the service worker which is needed for PWA functionality.
+// The service handles all kinds of background tasks like caching of static files and updating them when they change.
+// It could also handle push notifications.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker

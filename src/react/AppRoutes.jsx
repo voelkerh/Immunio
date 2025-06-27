@@ -23,6 +23,9 @@ import Error404 from './Pages/Error404'
 const AppRoutes = () => (
   <Routes>
 
+    {/* Added a debug option which disables the Splash screen timeout and redirects directly to home without data entry.
+        Should maybe also contain mock data.
+    */}
     <Route path="/" element={<Splash debug />} />
 
     <Route path="/home" element={<Home />} />
