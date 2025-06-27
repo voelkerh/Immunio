@@ -20,10 +20,10 @@ export const PersonProvider = ({ children }) => {
       { id: 2, category: 'schutzimpfung', name: 'Pertussis', diseases: ['Pertussis'], date: '30.04.1996' },
       { id: 3, category: 'schutzimpfung', name: 'Diphtherie, Tetanus, Pertussis, HiB', diseases: ['Diphtheria', 'Tetanus', 'Pertussis', 'Haemophilus influenzae b'], date: '30.05.1996' },
       { id: 4, category: 'schutzimpfung', name: 'Diphtherie, Tetanus, Pertussis, HiB', diseases: ['Diphtheria', 'Tetanus', 'Pertussis', 'Haemophilus influenzae b'], date: '05.05.1997' },
-      { id: 5, category: 'schutzimpfung', name: 'Diphtherie, Tetanus, Polio', diseases: ['Diphtheria', 'Tetanus', 'Poliomyelitis'], date: '28.06.2004' },
-      { id: 6, category: 'schutzimpfung', name: 'Polio', diseases: ['Poliomyelitis'], date: '02.04.1996' },
-      { id: 7, category: 'schutzimpfung', name: 'Polio', diseases: ['Poliomyelitis'], date: '30.05.1996' },
-      { id: 8, category: 'schutzimpfung', name: 'Polio', diseases: ['Poliomyelitis'], date: '05.05.1997' },
+      { id: 5, category: 'schutzimpfung', name: 'Diphtherie, Tetanus, Polio', diseases: ['Diphtheria', 'Tetanus', 'Polio'], date: '28.06.2004' },
+      { id: 6, category: 'schutzimpfung', name: 'Polio', diseases: ['Polio'], date: '02.04.1996' },
+      { id: 7, category: 'schutzimpfung', name: 'Polio', diseases: ['Polio'], date: '30.05.1996' },
+      { id: 8, category: 'schutzimpfung', name: 'Polio', diseases: ['Polio'], date: '05.05.1997' },
       { id: 9, category: 'schutzimpfung', name: 'Masern, Röteln, Mumps', diseases: ['Measles', 'Rubella', 'Parotitis'], date: '05.05.1997' },
       { id: 10, category: 'schutzimpfung', name: 'Masern, Röteln, Mumps', diseases: ['Measles', 'Rubella', 'Parotitis'], date: '01.01.2001' },
       { id: 11, category: 'schutzimpfung', name: 'Masern, Röteln, Mumps', diseases: ['Measles', 'Rubella', 'Parotitis'], date: '03.08.2004' },
@@ -33,11 +33,13 @@ export const PersonProvider = ({ children }) => {
       { id: 15, category: 'virushepatitis', name: 'Virushepatitis B', diseases: ['Hepatitis B'], date: '15.07.2015' },
       { id: 16, category: 'virushepatitis', name: 'Virushepatitis A', diseases: ['Hepatitis A', 'Typhus'], date: '15.07.2015' },
       { id: 17, category: 'virusgrippe', name: 'Influenza', diseases: ['Influenza'], date: '09.12.2021' },
-      { id: 17, category: 'virusgrippe', name: 'Influenza', diseases: ['Influenza'], date: '23.11.2022' },
-      { id: 18, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '11.03.2021' },
-      { id: 19, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '03.06.2021' },
-      { id: 20, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '07.12.2021' },
-      { id: 21, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '23.11.2022' }
+      { id: 18, category: 'virusgrippe', name: 'Influenza', diseases: ['Influenza'], date: '23.11.2022' },
+      { id: 19, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '11.03.2021' },
+      { id: 20, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '03.06.2021' },
+      { id: 21, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '07.12.2021' },
+      { id: 22, category: 'covid', name: 'COVID-19', diseases: ['COVID-19'], date: '23.11.2022' },
+      { id: 22, category: 'schutzimpfung', name: 'Tollwut', diseases: ['Rabies'], date: '10.03.2023' },
+      { id: 23, category: 'schutzimpfung', name: 'FSME', diseases: ['Tick-borne Encephalitis'], date: '10.03.2023' }
     ],
     plannedTrips: [
       {
