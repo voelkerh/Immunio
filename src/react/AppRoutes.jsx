@@ -12,6 +12,7 @@ import MapView from './Pages/Travel/MapView'
 import Travel from './Pages/Travel/Travel'
 import TravelOverview from './Pages/Travel/TravelOverview'
 import CountryView from './Pages/Travel/CountryView'
+import DateView from './Pages/Travel/DateView'
 
 import VaccinationCertificateOverview from './Pages/VaccinationCertificate/VaccinationCertificateOverview'
 
@@ -39,6 +40,7 @@ const AppRoutes = () => (
       <Route index element={<TravelOverview />} />
       <Route path="map" element={<MapView />} />
       <Route path="country/:name" element={<CountryView />} />
+      <Route path="date" element={<DateView />} />
     </Route>
 
     <Route path="*" element={<Error404 />} />

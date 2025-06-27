@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { Stack } from '@mui/system'
+import { Typography } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
 import Map from '../../Components/Map'
 
@@ -24,8 +25,9 @@ const MapView = () => {
       width="100%"
       height="100%"
       justifyContent="start"
-      alignItems="start"
+      alignItems="center"
     >
+      <Typography variant="h4" mt={5}>Wähle dein Reiseziel</Typography>
       <Map />
     </Stack>
   )
