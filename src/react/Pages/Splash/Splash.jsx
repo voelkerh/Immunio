@@ -1,21 +1,26 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import {
   Stack,
   Typography
 } from '@mui/material'
 
-const Splash = () => {
+const Splash = ({ debug }) => {
   const navigate = useNavigate()
+
+  // added debug option which redirects directly to home and turns of timeout.
+  const url = debug ? '/home' : '/first_home'
+  const timeoutMs = debug ? 1 : 1000
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigate('/first_home')
-    }, 3000)
+      navigate(url)
+    }, timeoutMs)
 
     return () => clearTimeout(timeout)
-  }, [navigate])
+  }, [navigate, url])
 
   return (
     <Stack
@@ -31,6 +36,9 @@ const Splash = () => {
       </Typography>
     </Stack>
   )
+}
+Splash.propTypes = {
+  debug: PropTypes.bool.isRequired
 }
 
 export default Splash

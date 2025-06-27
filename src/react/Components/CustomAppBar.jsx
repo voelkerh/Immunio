@@ -8,9 +8,8 @@ import { useAppBar } from '../Providers/AppBarProvider'
 const CustomAppBar = () => {
   const { config } = useAppBar()
   const navigate = useNavigate()
-
   return (
-    <AppBar position="static">
+    <AppBar>
       <Toolbar variant="dense">
         {config.showBackButton && (
           <IconButton
