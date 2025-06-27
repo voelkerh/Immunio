@@ -106,7 +106,7 @@ const AppLayout = () => {
             }}
           >
             {showTopAppBar && (
-              <CustomAppBar position="absolute" />
+              <CustomAppBar position="sticky" />
             )}
             <AppRoutes />
           </Stack>

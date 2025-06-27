@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { AppBar, Typography, IconButton, Toolbar } from '@mui/material'
 
 import { useNavigate } from 'react-router-dom'
@@ -40,6 +41,10 @@ const CustomAppBar = ({ position }) => {
       </Toolbar>
     </AppBar>
   )
+}
+
+CustomAppBar.propTypes = {
+  position: PropTypes.string
 }
 
 export default CustomAppBar
