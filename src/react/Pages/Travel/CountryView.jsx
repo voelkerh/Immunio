@@ -14,7 +14,7 @@ const dividerSx = { width: '100%', my: 2 }
 const listSx = { width: '100%' }
 const listItemSx = { divider: true }
 
-const getRecommendations = (countryName) => travelVaccinationsAllCountries[countryName.toLowerCase().replaceAll(' ', '-')]?.filter(v => v !== 'Routine vaccines') || []
+const getRecommendations = (countryName) => travelVaccinationsAllCountries[countryName.toLowerCase().replaceAll(' ', '-')]?.filter(vaccination => vaccination !== 'Routine vaccines') || []
 
 const isVaccinationComplete = (recommendations, vaccinations) => recommendations.every(recommendation => vaccinations?.some(vaccination => vaccination.diseases.includes(recommendation)))
 
