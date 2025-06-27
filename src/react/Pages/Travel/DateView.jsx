@@ -49,9 +49,7 @@ const DateView = () => {
       alignItems="center"
     >
       <Stack alignItems="center">
-        <Typography variant="h4" mt={5}>
-          Reisedaten
-        </Typography>
+        <Typography variant="h4" mt={5}>Reisedaten</Typography>
       </Stack>
       <Stack
         id="formFields"
@@ -82,12 +80,7 @@ const DateView = () => {
         </Stack>
       </Stack>
       <Stack>
-        <Button
-          variant="contained"
-          onClick={saveAndReturn}
-        >
-          Speichern
-        </Button>
+        <Button variant="contained" onClick={saveAndReturn}>Speichern</Button>
       </Stack>
     </Stack>
   )
