@@ -106,7 +106,7 @@ const AppLayout = () => {
             }}
           >
             {showTopAppBar && (
-              <CustomAppBar position="sticky" />
+              <CustomAppBar position="absolute" />
             )}
             <AppRoutes />
           </Stack>
@@ -132,7 +132,7 @@ const AppLayout = () => {
       ) : (
         // On mobile, just render the main content without Paper and border
         <>
-          {showTopAppBar && <CustomAppBar />}
+          {showTopAppBar && <CustomAppBar postition="fixed" />}
           <AppRoutes />
           {showBottomNav && (
             <Container

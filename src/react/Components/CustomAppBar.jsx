@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAppBar } from '../Providers/AppBarProvider'
 
-const CustomAppBar = () => {
+const CustomAppBar = ({ position }) => {
   const { config } = useAppBar()
   const navigate = useNavigate()
-  const position = 'fixed'
   return (
     <AppBar
       position={position}
