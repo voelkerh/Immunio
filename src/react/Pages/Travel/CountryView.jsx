@@ -21,12 +21,12 @@ const isVaccinationComplete = (recommendations, vaccinations) => recommendations
 const getMissingVaccinations = (recommendations, vaccinations) => recommendations.filter(recommendation => !vaccinations?.some(vaccination => vaccination.diseases.includes(recommendation)))
 
 const CountryView = () => {
-  const { name } = useParams()
+  const { name: countryName } = useParams()
   const { setConfig } = useAppBar()
   const { person, setPerson } = usePerson()
   const navigate = useNavigate()
 
-  const recommendations = getRecommendations(name)
+  const recommendations = getRecommendations(countryName)
   const travelVaccStatus = isVaccinationComplete(recommendations, person?.vaccinations)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const CountryView = () => {
     console.log('prev', person)
     setPerson(prev => ({
       ...prev, // ... immutable / copy of person
-      plannedTrips: [...prev.plannedTrips, { country: name }]
+      plannedTrips: [...prev.plannedTrips, { country: countryName }]
     }))
     navigate('/travel/date')
   }
@@ -55,7 +55,7 @@ const CountryView = () => {
       justifyContent="start"
       alignItems="center"
     >
-      <Typography variant="h4">{name}</Typography>
+      <Typography variant="h4">{countryName}</Typography>
       <Divider sx={dividerSx} />
       <Typography variant="h6">
         Impfstatus:
