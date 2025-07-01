@@ -41,45 +41,47 @@ const DateView = () => {
   }, [])
 
   return (
-    <Stack
-      flex="1 1 auto"
-      width="100%"
-      height="100%"
-      justifyContent="start"
-      alignItems="center"
-    >
-      <Stack alignItems="center">
-        <Typography variant="h4" mt={5}>Reisedaten</Typography>
-      </Stack>
+    <>
       <Stack
-        id="formFields"
+        flex="1 1 auto"
+        justifyContent="start"
         alignItems="center"
-        width="100%"
+        gap={5}
       >
-        <Stack width="100%" mt={5}>
-          <TextField
-            required
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Abfahrt"
-            type="date"
-            variant="outlined"
-            value={startDateInput}
-            onChange={handleStartDateChange}
-          />
+        <Stack alignItems="center">
+          <Typography variant="h4" mt={5}>Reisedaten</Typography>
         </Stack>
-        <Stack width="100%" mt={5}>
-          <TextField
-            required
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Rückkehr"
-            type="date"
-            variant="outlined"
-            value={endDateInput}
-            onChange={handleEndDateChange}
-          />
+        <Stack
+          id="formFields"
+          alignItems="center"
+          width="80%"
+          gap={5}
+        >
+          <Stack width="100%">
+            <TextField
+              required
+              slotProps={{ inputLabel: { shrink: true } }}
+              label="Abfahrt"
+              type="date"
+              variant="outlined"
+              value={startDateInput}
+              onChange={handleStartDateChange}
+            />
+          </Stack>
+          <Stack width="100%">
+            <TextField
+              required
+              slotProps={{ inputLabel: { shrink: true } }}
+              label="Rückkehr"
+              type="date"
+              variant="outlined"
+              value={endDateInput}
+              onChange={handleEndDateChange}
+            />
+          </Stack>
         </Stack>
       </Stack>
-      <Stack>
+      <Stack margin="20px">
         <Button
           variant="contained"
           disabled={!startDateInput || !endDateInput}
@@ -88,7 +90,7 @@ const DateView = () => {
           Speichern
         </Button>
       </Stack>
-    </Stack>
+    </>
   )
 }
 export default DateView
