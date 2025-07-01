@@ -56,8 +56,8 @@ const TravelOverview = () => {
         </Button>
         <Divider sx={dividerSx}>Geplante Reisen</Divider>
         <List sx={listSx}>
-          {person.plannedTrips?.map((trip, index) => (
-            <ListItem key={index} sx={listItemSx}>
+          {person.plannedTrips?.map((trip) => (
+            <ListItem key={trip.country + trip.startDate} sx={listItemSx}>
               <ListItemText
                 primary={trip.country.charAt(0).toUpperCase() + trip.country.slice(1).toLowerCase()}
                 secondary={`${trip.startDate} - ${trip.endDate}`}
