@@ -7,27 +7,21 @@ import { Typography, Button, Divider, List, ListItem, ListItemText } from '@mui/
 
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
-
-import travelVaccinationsAllCountries from '../../../assets/travel_vaccinations.json'
+import { useCountryStatus } from '../../Providers/CountryStatusProvider'
 
 const dividerSx = { width: '100%', my: 2 }
 const listSx = { width: '100%' }
 const listItemSx = { divider: true }
 
-const getRecommendations = (countryName) => travelVaccinationsAllCountries[countryName.toLowerCase().replaceAll(' ', '-')]?.filter(vaccination => vaccination !== 'Routine vaccines') || []
-
-const isVaccinationComplete = (recommendations, vaccinations) => recommendations.every(recommendation => vaccinations?.some(vaccination => vaccination.diseases.includes(recommendation)))
-
-const getMissingVaccinations = (recommendations, vaccinations) => recommendations.filter(recommendation => !vaccinations?.some(vaccination => vaccination.diseases.includes(recommendation)))
-
 const CountryView = () => {
-  const { name: countryName } = useParams()
+  const { name } = useParams()
+  const countryName = name.toLowerCase().replaceAll(' ', '-')
   const { setConfig } = useAppBar()
   const { person, setPerson } = usePerson()
+  const { statusMap } = useCountryStatus()
+  const { missing = [], recommended = [] } = statusMap[countryName] || {} // fallback if not yet loaded
+  const isTravelVaccComplete = missing?.length === 0
   const navigate = useNavigate()
-
-  const recommendations = getRecommendations(countryName)
-  const travelVaccStatus = isVaccinationComplete(recommendations, person?.vaccinations)
 
   useEffect(() => {
     setConfig({
@@ -42,7 +36,7 @@ const CountryView = () => {
     console.log('prev', person)
     setPerson(prev => ({
       ...prev, // ... immutable / copy of person
-      plannedTrips: [...prev.plannedTrips, { country: countryName }]
+      plannedTrips: [...prev.plannedTrips, { name }]
     }))
     navigate('/travel/date')
   }
@@ -55,18 +49,18 @@ const CountryView = () => {
       justifyContent="start"
       alignItems="center"
     >
-      <Typography variant="h4">{countryName}</Typography>
+      <Typography variant="h4">{name}</Typography>
       <Divider sx={dividerSx} />
       <Typography variant="h6">
         Impfstatus:
         {' '}
-        {travelVaccStatus ? 'Vollständig' : 'Unvollständig'}
+        {isTravelVaccComplete ? 'Vollständig' : 'Unvollständig'}
       </Typography>
-      {!travelVaccStatus && (
+      {!isTravelVaccComplete && (
         <>
           <Divider sx={dividerSx}>Fehlende Impfungen</Divider>
           <List sx={listSx}>
-            {getMissingVaccinations(recommendations, person.vaccinations).map((vaccination) => (
+            {missing.map((vaccination) => (
               <ListItem key={vaccination} sx={listItemSx}>
                 <ListItemText primary={vaccination} />
               </ListItem>
@@ -76,7 +70,7 @@ const CountryView = () => {
       )}
       <Divider sx={dividerSx}>Empfohlene Impfungen</Divider>
       <List sx={listSx}>
-        {recommendations?.map((vaccination) => (
+        {recommended.map((vaccination) => (
           <ListItem key={vaccination} sx={listItemSx}>
             <ListItemText primary={vaccination} />
           </ListItem>
