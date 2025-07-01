@@ -5,14 +5,20 @@ import { useNavigate } from 'react-router-dom'
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
-const getStyle = (feature) => {
-  const { status } = feature.properties
-  return {
-    color: '#000',
-    weight: 2,
-    fillColor: status === 'green' ? '#4CAF50' : '#F44336',
-    fillOpacity: 0.5
+import { useCountryStatus } from '../Providers/CountryStatusProvider'
+
+const mapName = (geoJsonName) => {
+  const dict = {
+    'Czech Republic': 'czechia',
+    'Republic of the Congo': 'congo',
+    'Democratic Republic of the Congo': 'democratic-republic-of-congo',
+    'People\'s Republic of China': 'china',
+    'Myanmar': 'burma',
+    'United States of America': 'united-states',
+    'Antartica': 'antarctica'
   }
+  if (geoJsonName in dict) return dict[geoJsonName]
+  return geoJsonName.toLowerCase().replaceAll(' ', '-')
 }
 
 const Map = () => {
@@ -36,6 +42,27 @@ const Map = () => {
     layer.on({
       click: () => handleCountryClick(name)
     })
+  }
+
+  const getStyle = (feature) => {
+    const { NAME_EN } = feature.properties
+    const countryName = mapName(NAME_EN)
+    const { statusMap } = useCountryStatus()
+    const { missing = [], recommended = [] } = statusMap[countryName] || {} // fallback if not yet loaded
+    if (recommended.length === 0) {
+      return {
+        color: '#000',
+        weight: 2,
+        fillColor: '#808080',
+        fillOpacity: 0.5
+      }
+    }
+    return {
+      color: '#000',
+      weight: 2,
+      fillColor: missing?.length === 0 ? '#4CAF50' : '#F44336',
+      fillOpacity: 0.5
+    }
   }
 
   return (
