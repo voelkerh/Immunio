@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Stack } from '@mui/system'
@@ -10,8 +10,8 @@ import { usePerson } from '../../Providers/PersonProvider'
 
 const DateView = () => {
   const { setPerson } = usePerson()
-  const [startDateInput, setStartDateInput] = React.useState('')
-  const [endDateInput, setEndDateInput] = React.useState('')
+  const [startDateInput, setStartDateInput] = useState('')
+  const [endDateInput, setEndDateInput] = useState('')
 
   const { setConfig } = useAppBar()
   const navigate = useNavigate()
@@ -80,7 +80,13 @@ const DateView = () => {
         </Stack>
       </Stack>
       <Stack>
-        <Button variant="contained" disabled={!startDateInput || !endDateInput} onClick={saveAndReturn}>Speichern</Button>
+        <Button
+          variant="contained"
+          isabled={!startDateInput || !endDateInput}
+          onClick={saveAndReturn}
+        >
+          Speichern
+        </Button>
       </Stack>
     </Stack>
   )
