@@ -22,6 +22,10 @@ const CountryView = () => {
   const { missing = [], recommended = [] } = statusMap[countryName] || {} // fallback if not yet loaded
   const isTravelVaccComplete = missing?.length === 0
   const navigate = useNavigate()
+  let statusText = 'Unbekannt'
+  if (recommended.length > 0) {
+    statusText = isTravelVaccComplete ? 'Vollständig' : 'Unvollständig'
+  }
 
   useEffect(() => {
     setConfig({
@@ -54,7 +58,7 @@ const CountryView = () => {
       <Typography variant="h6">
         Impfstatus:
         {' '}
-        {isTravelVaccComplete ? 'Vollständig' : 'Unvollständig'}
+        {statusText}
       </Typography>
       {!isTravelVaccComplete && (
         <>
@@ -69,6 +73,9 @@ const CountryView = () => {
         </>
       )}
       <Divider sx={dividerSx}>Empfohlene Impfungen</Divider>
+      {recommended.length === 0 && (
+        <Typography>Für dieses Land liegen keine Empfehlungen vor.</Typography>
+      )}
       <List sx={listSx}>
         {recommended.map((vaccination) => (
           <ListItem key={vaccination} sx={listItemSx}>
