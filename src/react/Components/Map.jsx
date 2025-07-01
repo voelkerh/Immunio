@@ -59,7 +59,7 @@ const Map = () => {
     return {
       color: '#000',
       weight: 2,
-      fillColor: { fillColor },
+      fillColor,
       fillOpacity: 0.5
     }
   }
