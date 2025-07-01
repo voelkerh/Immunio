@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
@@ -49,18 +50,16 @@ const Map = () => {
     const countryName = mapName(NAME_EN)
     const { statusMap } = useCountryStatus()
     const { missing = [], recommended = [] } = statusMap[countryName] || {} // fallback if not yet loaded
+    let fillColor = null
     if (recommended.length === 0) {
-      return {
-        color: '#000',
-        weight: 2,
-        fillColor: '#808080',
-        fillOpacity: 0.5
-      }
+      fillColor = '#808080'
+    } else {
+      fillColor = missing?.length === 0 ? '#4CAF50' : '#F44336'
     }
     return {
       color: '#000',
       weight: 2,
-      fillColor: missing?.length === 0 ? '#4CAF50' : '#F44336',
+      fillColor: { fillColor },
       fillOpacity: 0.5
     }
   }
