@@ -51,7 +51,7 @@ const Map = () => {
     const { statusMap } = useCountryStatus()
     const { missing = [], recommended = [] } = statusMap[countryName] || {} // fallback if not yet loaded
     let fillColor = null
-    if (recommended.length === 0) {
+    if (recommended?.length === 0) {
       fillColor = '#808080'
     } else {
       fillColor = missing?.length === 0 ? '#4CAF50' : '#F44336'
