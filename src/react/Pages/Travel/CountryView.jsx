@@ -40,7 +40,7 @@ const CountryView = () => {
     console.log('prev', person)
     setPerson(prev => ({
       ...prev, // ... immutable / copy of person
-      plannedTrips: [...prev.plannedTrips, { name }]
+      plannedTrips: [...prev.plannedTrips, { country: name }]
     }))
     navigate('/travel/date')
   }
