@@ -13,7 +13,13 @@ const CustomAppBar = () => {
       <Toolbar variant="dense">
         {config.showBackButton && (
           <IconButton
-            onClick={() => navigate(config.backPath)}
+            onClick={() => {
+              if (config.backPath === '__back__') {
+                navigate(-1)
+              } else {
+                navigate(config.backPath)
+              }
+            }}
             edge="start"
             color="inherit"
             aria-label="back"
