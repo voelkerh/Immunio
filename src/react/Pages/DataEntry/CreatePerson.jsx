@@ -11,14 +11,14 @@ const CreatePerson = () => {
   const [birthdate, setBirthdate] = React.useState('')
   const [gender, setGender] = React.useState('')
   const [riskGroup, setRiskGroup] = React.useState('')
-  const [pregante, setPregante] = React.useState('')
+  const [pregante, setPregante] = React.useState(false)
   const { setPerson } = usePerson()
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleBirthdateChange = (event) => setBirthdate(event.target.value)
   const handleGenderChange = (event) => setGender(event.target.value)
   const handleRiskGroupChange = (event) => setRiskGroup(event.target.value)
-  const handlePreganteChange = (event) => setPregante(event.target.value)
+  const handlePreganteChange = (event) => setPregante(event.target.checked)
 
   const isFormValid = name && birthdate && gender
 
@@ -99,9 +99,14 @@ const CreatePerson = () => {
         <Stack width="100%" mt={5}>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }} />}
+              control={
+                <Checkbox
+                  sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
+                  checked={pregante}
+                  onChange={handlePreganteChange}
+                />
+              }
               label="Schwangerschaft"
-              onChange={handlePreganteChange}
             />
           </FormGroup>
         </Stack>
@@ -122,7 +127,14 @@ const CreatePerson = () => {
           sx={{ mt: 0, width: '50%', height: '5rem' }}
           disabled={!isFormValid}
           onClick={() => {
-            setPerson({ name, birthdate, gender, riskGroup, pregante })
+            setPerson(currentPerson => ({
+              ...currentPerson,
+              name,
+              birthdate,
+              gender,
+              riskGroup,
+              isPregnant: pregante
+            }))
             navigate('/home')
           }}
         >
