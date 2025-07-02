@@ -27,6 +27,7 @@ export const PersonProvider = ({ children }) => {
     travelVaccinations: [],
     plannedTrips: [
       {
+        id: 'france,2025-08-01,2025-08-16',
         country: 'france',
         startDate: '2025-08-01',
         endDate: '2025-08-16'
