@@ -22,7 +22,13 @@ const DateView = () => {
   const saveAndReturn = () => {
     setPerson(prev => {
       const lastTrip = prev.plannedTrips.at(-1)
-      const updatedTrip = { ...lastTrip, startDate: startDateInput, endDate: endDateInput }
+      const tripId = `${lastTrip.country.toLowerCase()},${startDateInput},${endDateInput}`
+      const updatedTrip = {
+        ...lastTrip,
+        id: tripId,
+        startDate: startDateInput,
+        endDate: endDateInput
+      }
       return {
         ...prev,
         plannedTrips: [...prev.plannedTrips.slice(0, -1), updatedTrip]
