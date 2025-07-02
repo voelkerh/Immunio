@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 import { Stack, Checkbox, FormControlLabel, FormGroup, Typography, Button, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
-
 import { usePerson } from '../../Providers/PersonProvider'
+import riskGroups from '../../../constants/riskGroups'
 
 const CreatePerson = () => {
   const navigate = useNavigate()
@@ -11,12 +11,14 @@ const CreatePerson = () => {
   const [birthdate, setBirthdate] = React.useState('')
   const [gender, setGender] = React.useState('')
   const [riskGroup, setRiskGroup] = React.useState('')
+  const [pregante, setPregante] = React.useState('')
   const { setPerson } = usePerson()
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleBirthdateChange = (event) => setBirthdate(event.target.value)
   const handleGenderChange = (event) => setGender(event.target.value)
   const handleRiskGroupChange = (event) => setRiskGroup(event.target.value)
+  const handlePreganteChange = (event) => setPregante(event.target.value)
 
   const isFormValid = name && birthdate && gender
 
@@ -86,10 +88,11 @@ const CreatePerson = () => {
               label="Risikogruppe"
               onChange={handleRiskGroupChange}
             >
-              <MenuItem value="none">Keine</MenuItem>
-              <MenuItem value="A">A</MenuItem>
-              <MenuItem value="B">B</MenuItem>
-              <MenuItem value="C">C</MenuItem>
+              {riskGroups.map((group) => (
+                <MenuItem key={group} value={group}>
+                  {group}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Stack>
@@ -98,6 +101,7 @@ const CreatePerson = () => {
             <FormControlLabel
               control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }} />}
               label="Schwangerschaft"
+              onChange={handlePreganteChange}
             />
           </FormGroup>
         </Stack>
@@ -118,7 +122,7 @@ const CreatePerson = () => {
           sx={{ mt: 0, width: '50%', height: '5rem' }}
           disabled={!isFormValid}
           onClick={() => {
-            setPerson({ name, birthdate, gender, riskGroup })
+            setPerson({ name, birthdate, gender, riskGroup, pregante })
             navigate('/home')
           }}
         >
