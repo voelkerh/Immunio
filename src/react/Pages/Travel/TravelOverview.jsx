@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Stack, Button, Divider, List, ListItem, ListItemText } from '@mui/material'
-import { Settings } from '@mui/icons-material'
+import { Stack, Button, Divider, List, ListItem, ListItemText, IconButton } from '@mui/material'
+import { Settings, Edit } from '@mui/icons-material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
@@ -26,6 +26,11 @@ const TravelOverview = () => {
   }, [])
 
   const { person } = usePerson()
+
+  const handleUpdateTrip = (startDate, endDate, country) => {
+    const tripId = `${country.toLowerCase()},${startDate},${endDate}`
+    navigate(`/travel/date/${encodeURIComponent(tripId)}`)
+  }
 
   return (
     <Stack
@@ -56,12 +61,18 @@ const TravelOverview = () => {
         </Button>
         <Divider sx={dividerSx}>Geplante Reisen</Divider>
         <List sx={listSx}>
-          {person.plannedTrips?.map((trip, index) => (
-            <ListItem key={index} sx={listItemSx}>
+          {person.plannedTrips?.map((trip) => (
+            <ListItem key={trip.id || `${trip.country},${trip.startDate},${trip.endDate}`} sx={listItemSx}>
               <ListItemText
                 primary={trip.country.charAt(0).toUpperCase() + trip.country.slice(1).toLowerCase()}
                 secondary={`${trip.startDate} - ${trip.endDate}`}
               />
+              <IconButton
+                onClick={() => handleUpdateTrip(trip.startDate, trip.endDate, trip.country)}
+                size="small"
+              >
+                <Edit />
+              </IconButton>
             </ListItem>
           ))}
         </List>

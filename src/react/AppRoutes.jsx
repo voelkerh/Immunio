@@ -44,6 +44,7 @@ const AppRoutes = () => (
       <Route path="map" element={<MapView />} />
       <Route path="country/:name" element={<CountryView />} />
       <Route path="date" element={<DateView />} />
+      <Route path="date/:tripId" element={<DateView />} />
     </Route>
 
     <Route path="*" element={<Error404 />} />

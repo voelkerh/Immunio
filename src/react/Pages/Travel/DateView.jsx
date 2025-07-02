@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Stack } from '@mui/system'
 import { ArrowBack } from '@mui/icons-material'
@@ -9,23 +9,44 @@ import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
 
 const DateView = () => {
-  const { setPerson } = usePerson()
+  const { person, setPerson } = usePerson()
+  const { tripId } = useParams()
   const [startDateInput, setStartDateInput] = React.useState('')
   const [endDateInput, setEndDateInput] = React.useState('')
 
   const { setConfig } = useAppBar()
   const navigate = useNavigate()
 
+  const isEditing = tripId !== undefined
+  const existingTrip = isEditing ? person.plannedTrips.find(trip => trip.id === decodeURIComponent(tripId)) : null
+
+  useEffect(() => {
+    if (isEditing && existingTrip) {
+      // Fill fields with existing trip data
+      setStartDateInput(existingTrip.startDate || '')
+      setEndDateInput(existingTrip.endDate || '')
+    }
+  }, [isEditing, existingTrip])
+
   const handleStartDateChange = (event) => setStartDateInput(event.target.value)
   const handleEndDateChange = (event) => setEndDateInput(event.target.value)
 
   const saveAndReturn = () => {
     setPerson(prev => {
+      if (isEditing && existingTrip) {
+        // Update existing trip
+        const newTripId = `${existingTrip.country.toLowerCase()},${startDateInput},${endDateInput}`
+        const updatedTrips = prev.plannedTrips.map(trip => (trip.id === existingTrip.id ? { ...trip, id: newTripId, startDate: startDateInput, endDate: endDateInput } : trip))
+        return {
+          ...prev,
+          plannedTrips: updatedTrips
+        }
+      }
       const lastTrip = prev.plannedTrips.at(-1)
-      const tripId = `${lastTrip.country.toLowerCase()},${startDateInput},${endDateInput}`
+      const newTripId = `${lastTrip.country.toLowerCase()},${startDateInput},${endDateInput}`
       const updatedTrip = {
         ...lastTrip,
-        id: tripId,
+        id: newTripId,
         startDate: startDateInput,
         endDate: endDateInput
       }
@@ -40,11 +61,25 @@ const DateView = () => {
   useEffect(() => {
     setConfig({
       showBackButton: true,
-      backPath: '/travel/map',
+      backPath: isEditing ? '/travel' : '/travel/map',
       icon: <ArrowBack />,
-      title: 'Reisen'
+      title: isEditing ? 'Reise bearbeiten' : 'Reisen'
     })
-  }, [])
+  }, [isEditing])
+
+  // If editing but trip not found, show error or redirect
+  if (isEditing && !existingTrip) {
+    return (
+      <Stack alignItems="center" justifyContent="center" flex="1">
+        <Typography variant="h6" color="error">
+          Reise nicht gefunden
+        </Typography>
+        <Button onClick={() => navigate('/travel')}>
+          Zurück zur Übersicht
+        </Button>
+      </Stack>
+    )
+  }
 
   return (
     <Stack
@@ -56,8 +91,13 @@ const DateView = () => {
     >
       <Stack alignItems="center">
         <Typography variant="h4" mt={5}>
-          Reisedaten
+          {isEditing ? 'Reise bearbeiten' : 'Reisedaten'}
         </Typography>
+        {isEditing && existingTrip && (
+          <Typography variant="h6" mt={2}>
+            {existingTrip.country.charAt(0).toUpperCase() + existingTrip.country.slice(1).toLowerCase()}
+          </Typography>
+        )}
       </Stack>
       <Stack
         id="formFields"
@@ -98,4 +138,5 @@ const DateView = () => {
     </Stack>
   )
 }
+
 export default DateView
