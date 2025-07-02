@@ -1,4 +1,5 @@
 const riskGroups = [
+  'Keine',
   'Bewohner*in In Altenpflege-/Pflegeeinrichtung',
   'Beschäftigte*r In Altenpflege-/Pflegeeinrichtung',
   'Älter Als 60',
