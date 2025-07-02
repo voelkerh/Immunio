@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Stack, Button, Divider, List, ListItem, ListItemText, IconButton } from '@mui/material'
-import { Settings, Edit } from '@mui/icons-material'
+import { Settings, Edit, Delete } from '@mui/icons-material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
@@ -25,11 +25,19 @@ const TravelOverview = () => {
     })
   }, [])
 
-  const { person } = usePerson()
+  const { person, setPerson } = usePerson()
 
   const handleUpdateTrip = (startDate, endDate, country) => {
     const tripId = `${country.toLowerCase()},${startDate},${endDate}`
     navigate(`/travel/date/${encodeURIComponent(tripId)}`)
+  }
+
+  const handleDeleteTrip = (startDate, endDate, country) => {
+    const tripId = `${country.toLowerCase()},${startDate},${endDate}`
+    setPerson(prev => ({
+      ...prev,
+      plannedTrips: prev.plannedTrips.filter(trip => trip.id !== tripId)
+    }))
   }
 
   return (
@@ -72,6 +80,12 @@ const TravelOverview = () => {
                 size="small"
               >
                 <Edit />
+              </IconButton>
+              <IconButton
+                onClick={() => handleDeleteTrip(trip.startDate, trip.endDate, trip.country)}
+                size="small"
+              >
+                <Delete />
               </IconButton>
             </ListItem>
           ))}
