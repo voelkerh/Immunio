@@ -67,12 +67,6 @@ const ProfileSettings = () => {
               ))}
             </Select>
           </FormControl>
-          <Autocomplete
-            options={weeks}
-            sx={{ width: 300, marginTop: 1 }}
-            // Das steht in der MUI Doku so drin mit dem prop spreading, deswegen bleibt hier alles so wie es ist, ob du willst und nicht
-            renderInput={(params) => <TextField {...params} label="Wochen vor Fälligkeit" />}
-          />
           <Divider sx={{ marginTop: 2 }} />
           <Typography
             variant="h4"
