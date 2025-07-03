@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState } from 'react'
 
+import riskGroups from '../../constants/riskGroups'
+import weeks from '../../constants/weeks'
+
 // create new react context
 const PersonContext = createContext()
 
@@ -12,10 +15,10 @@ export const PersonProvider = ({ children }) => {
     name: 'Lena',
     birthdate: '22.10.1995',
     gender: 'weiblich',
-    riskGroups: 'Keine',
+    riskGroups: riskGroups[0],
     isPregnant: false,
     receiveNoticications: false,
-    notificationWeeks: 0,
+    notificationWeeks: weeks[0],
     vaccinations: [
       { id: 0, category: 'gelbfieber', name: 'Gelbfieber', diseases: ['Yellow Fever'], date: '31.08.2017' },
       { id: 1, category: 'schutzimpfung', name: 'Diphtherie, Tetanus, Pertussis, HiB', diseases: ['Diphtheria', 'Tetanus', 'Pertussis', 'Haemophilus influenzae b'], date: '02.04.1996' },
