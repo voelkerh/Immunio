@@ -5,6 +5,7 @@ import { ArrowBack } from '@mui/icons-material'
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
 import riskGroups from '../../../constants/riskGroups'
+import weeks from '../../../constants/weeks'
 
 const ProfileSettings = () => {
   const { setConfig } = useAppBar()
@@ -25,8 +26,6 @@ const ProfileSettings = () => {
   const [localNotificationWeeks, setLocalNotificatioNWeeks] = React.useState(person.notificationWeeks)
   const [localRiskGroups, setLocalRiskGroup] = React.useState(person.riskGroups)
   const [localIsPregnant, setLocalIsPregnant] = React.useState(person.isPregnant)
-
-  const weeks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
   return (
     <Stack
