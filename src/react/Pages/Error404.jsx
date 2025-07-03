@@ -8,12 +8,7 @@ const Error404 = () => (
     justifyContent="center"
     alignItems="center"
   >
-    <Typography
-      variant="h5"
-      color="error"
-    >
-      View is missing ... sorry!
-    </Typography>
+    <Typography variant="h5" color="error">View is missing ... sorry!</Typography>
   </Stack>
 )
 
