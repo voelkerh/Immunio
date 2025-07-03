@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { Stack, Typography, Checkbox, FormGroup, FormControlLabel, TextField, Divider, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
-import Autocomplete from '@mui/material/Autocomplete'
+import { Stack, Typography, Checkbox, FormGroup, FormControlLabel, Divider, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material'
 import { ArrowBack } from '@mui/icons-material'
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
@@ -20,6 +19,12 @@ const ProfileSettings = () => {
   }, [])
 
   const { person, setPerson } = usePerson()
+  console.log(person)
+
+  const [localReceiveNotifications, setLocalReceiveNotifications] = React.useState(person.receiveNotifications)
+  const [localNotificationWeeks, setLocalNotificatioNWeeks] = React.useState(person.notificationWeeks)
+  const [localRiskGroups, setLocalRiskGroup] = React.useState(person.riskGroups)
+  const [localIsPregnant, setLocalIsPregnant] = React.useState(person.isPregnant)
 
   const weeks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
@@ -46,7 +51,11 @@ const ProfileSettings = () => {
           sx={{ marginLeft: 5, marginTop: 1, marginRight: 5 }}
         >
           <FormControlLabel
-            control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }} />}
+            control={<Checkbox
+              sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }}
+              checked={localReceiveNotifications}
+              onChange={e => setLocalReceiveNotifications(e.target.checked)}
+            />}
             label={
               <Typography variant="h6">Erhalten</Typography>
             }
@@ -59,6 +68,8 @@ const ProfileSettings = () => {
               labelId="notification-weeks-label"
               id="select-notification-weeks"
               label="Wochen vor Fälligkeit"
+              value={localNotificationWeeks}
+              onChange={(event) => { setLocalNotificatioNWeeks(event.target.value) }}
             >
               {weeks.map((group) => (
                 <MenuItem key={group} value={group}>
@@ -82,8 +93,8 @@ const ProfileSettings = () => {
               labelId="risk-group-label"
               id="select-risk-group"
               label="Risikogruppe"
-              value={person.riskGroup || ''}
-              onChange={(event) => { setPerson({ ...person, riskGroup: event.target.value }) }}
+              value={localRiskGroups}
+              onChange={e => { setLocalRiskGroup(e.target.value) }}
             >
               {riskGroups.map((group) => (
                 <MenuItem key={group} value={group}>
@@ -96,14 +107,31 @@ const ProfileSettings = () => {
             sx={{ marginTop: 1 }}
             control={<Checkbox
               sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }}
-              checked={person.isPregnant}
-              onChange={e => setPerson({ ...person, isPregnant: e.target.checked })}
+              checked={localIsPregnant}
+              onChange={e => setLocalIsPregnant(e.target.checked)}
             />}
             label={
               <Typography variant="h6">Schwangerschaft</Typography>
             }
           />
         </FormGroup>
+      </Stack>
+      <Stack>
+        <Button
+          onClick={() => setPerson(
+            {
+              ...person,
+              receiveNotifications: localReceiveNotifications,
+              notificationWeeks: localNotificationWeeks,
+              riskGroups: localRiskGroups,
+              isPregnant: localIsPregnant
+            }
+          )}
+          variant="contained"
+          sx={{ marginBottom: 2 }}
+        >
+          Speichern
+        </Button>
       </Stack>
     </Stack>
   )
