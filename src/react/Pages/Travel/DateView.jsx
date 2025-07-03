@@ -139,14 +139,14 @@ const DateView = () => {
             value={endDateInput}
             onChange={handleEndDateChange}
           />
-            {(!isInputValid && startDateInput && endDateInput) && (
-              <Typography
-                color="red"
-                mt={2}
-              >
-                Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreise Datum muss vor dem Abreise Datum liegen.
-              </Typography>
-            )}
+          {(!isInputValid && startDateInput && endDateInput) && (
+            <Typography
+              color="red"
+              mt={2}
+            >
+              Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreisedatum muss vor dem Abreisedatum liegen.
+            </Typography>
+          )}
         </Stack>
       </Stack>
       <Stack>
