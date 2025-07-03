@@ -11,8 +11,9 @@ import { usePerson } from '../../Providers/PersonProvider'
 const DateView = () => {
   const { person, setPerson } = usePerson()
   const { tripId } = useParams()
-  const [startDateInput, setStartDateInput] = React.useState('')
-  const [endDateInput, setEndDateInput] = React.useState('')
+  const [startDateInput, setStartDateInput] = useState('')
+  const [endDateInput, setEndDateInput] = useState('')
+  const [isInputValid, setIsInputValid] = useState(false)
 
   const { setConfig } = useAppBar()
   const navigate = useNavigate()
@@ -28,8 +29,33 @@ const DateView = () => {
     }
   }, [isEditing, existingTrip])
 
-  const handleStartDateChange = (event) => setStartDateInput(event.target.value)
-  const handleEndDateChange = (event) => setEndDateInput(event.target.value)
+  const isEditing = tripId !== undefined
+  const existingTrip = isEditing ? person.plannedTrips.find(trip => trip.id === decodeURIComponent(tripId)) : null
+
+  useEffect(() => {
+    if (isEditing && existingTrip) {
+      // Fill fields with existing trip data
+      setStartDateInput(existingTrip.startDate || '')
+      setEndDateInput(existingTrip.endDate || '')
+    }
+  }, [isEditing, existingTrip])
+
+  useEffect(() => {
+    const typedStartDate = new Date(startDateInput)
+    const typedEndDate = new Date(endDateInput)
+    const now = new Date()
+    now.setHours(0, 0, 0, 0)
+    console.log(now)
+    const isValid = startDateInput && endDateInput && (typedStartDate <= typedEndDate) && typedStartDate >= now && typedEndDate >= now
+    setIsInputValid(isValid)
+  }, [startDateInput, endDateInput])
+
+  const handleStartDateChange = (event) => {
+    setStartDateInput(event.target.value)
+  }
+  const handleEndDateChange = (event) => {
+    setEndDateInput(event.target.value)
+  }
 
   const saveAndReturn = () => {
     setPerson(prev => {
@@ -125,12 +151,20 @@ const DateView = () => {
             value={endDateInput}
             onChange={handleEndDateChange}
           />
+            {(!isInputValid && startDateInput && endDateInput) && (
+              <Typography
+                color="red"
+                mt={2}
+              >
+                Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreise Datum muss vor dem Abreise Datum liegen.
+              </Typography>
+            )}
         </Stack>
       </Stack>
       <Stack>
         <Button
           variant="contained"
-          disabled={!startDateInput || !endDateInput}
+          disabled={!isInputValid}
           onClick={saveAndReturn}
         >
           Speichern

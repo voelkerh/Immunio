@@ -12,16 +12,8 @@ const FirstTimeHome = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Stack
-        flex="1 1 auto"
-        alignItems="center"
-      >
-        <Typography
-          variant="h2"
-          mt={40}
-        >
-          immunio.
-        </Typography>
+      <Stack flex="1 1 auto" alignItems="center">
+        <Typography variant="h2" mt={40}>immunio.</Typography>
         <Typography
           variant="body1"
           fontSize="1.5rem"

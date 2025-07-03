@@ -47,21 +47,14 @@ const ProfileSettings = () => {
       alignItems="center"
       width="100%"
     >
-      <Typography
-        variant="h4"
-        sx={{ marginTop: 1 }}
-      >
-        Benachrichtigungen
-      </Typography>
+      <Typography variant="h4" sx={{ marginTop: 1 }}>Benachrichtigungen</Typography>
       <Stack
         flex="1 1 auto"
         justifyContent="flex-start"
         alignItems="left"
         width="100%"
       >
-        <FormGroup
-          sx={{ marginLeft: 5, marginTop: 1, marginRight: 5 }}
-        >
+        <FormGroup sx={{ marginLeft: 5, marginTop: 1, marginRight: 5 }}>
           <FormControlLabel
             control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }} />}
             label={
@@ -75,12 +68,7 @@ const ProfileSettings = () => {
             renderInput={(params) => <TextField {...params} label="Wochen vor Fälligkeit" />}
           />
           <Divider sx={{ marginTop: 2 }} />
-          <Typography
-            variant="h4"
-            sx={{ marginTop: 1 }}
-          >
-            Personenbezogenes
-          </Typography>
+          <Typography variant="h4" sx={{ marginTop: 1 }}>Personenbezogenes</Typography>
           <Autocomplete
             options={riskGroups}
             sx={{ width: 300, marginTop: 1 }}

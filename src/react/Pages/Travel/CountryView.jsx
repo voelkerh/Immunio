@@ -55,11 +55,7 @@ const CountryView = () => {
     >
       <Typography variant="h4">{name}</Typography>
       <Divider sx={dividerSx} />
-      <Typography variant="h6">
-        Impfstatus:
-        {' '}
-        {statusText}
-      </Typography>
+      <Typography variant="h6">{`Impfstatus: ${statusText}`}</Typography>
       {!isTravelVaccComplete && (
         <>
           <Divider sx={dividerSx}>Fehlende Impfungen</Divider>

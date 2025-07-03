@@ -43,9 +43,7 @@ const VaccinationCertificateOverview = () => {
       ? items
       : (
         <ListItem>
-          <ListItemText
-            secondary="Keine Impfungen in dieser Kategorie."
-          />
+          <ListItemText secondary="Keine Impfungen in dieser Kategorie." />
         </ListItem>
       )
   }

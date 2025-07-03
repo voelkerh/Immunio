@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { Stack, Checkbox, FormControlLabel, FormGroup, Typography, Button, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 
@@ -7,18 +7,35 @@ import { usePerson } from '../../Providers/PersonProvider'
 const CreatePerson = () => {
   const navigate = useNavigate()
 
-  const [name, setName] = React.useState('')
-  const [birthdate, setBirthdate] = React.useState('')
-  const [gender, setGender] = React.useState('')
-  const [riskGroup, setRiskGroup] = React.useState('')
+  const [name, setName] = useState('')
+  const [birthdate, setBirthdate] = useState('')
+  const [gender, setGender] = useState('')
+  const [riskGroup, setRiskGroup] = useState('')
   const { setPerson } = usePerson()
+  const [isInputValid, setIsInputValid] = useState(false)
+  const [isDateValid, setIsDateValid] = useState(false)
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleBirthdateChange = (event) => setBirthdate(event.target.value)
   const handleGenderChange = (event) => setGender(event.target.value)
   const handleRiskGroupChange = (event) => setRiskGroup(event.target.value)
 
-  const isFormValid = name && birthdate && gender
+  useEffect(() => {
+    const isValid = (
+      (new Date(birthdate) < Date.now())
+    )
+    setIsDateValid(isValid)
+  }, [birthdate])
+
+  useEffect(() => {
+    const isValid = (
+      birthdate &&
+      name &&
+      gender &&
+      isDateValid
+    )
+    setIsInputValid(isValid)
+  }, [birthdate, name, gender])
 
   return (
     <Stack
@@ -29,9 +46,7 @@ const CreatePerson = () => {
     >
       {/* Page Title */}
       <Stack alignItems="center">
-        <Typography variant="h4" mt={5}>
-          Neue Person anlegen
-        </Typography>
+        <Typography variant="h4" mt={5}>Neue Person anlegen</Typography>
       </Stack>
       {/* Form Fields */}
       <Stack
@@ -100,6 +115,13 @@ const CreatePerson = () => {
               label="Schwangerschaft"
             />
           </FormGroup>
+          {(!isDateValid && birthdate) && (
+            <Typography
+              color="red"
+            >
+              Dein Geburtsdatum darf nicht in der Vergangenheit liegen.
+            </Typography>
+          )}
         </Stack>
       </Stack>
       {/* Nav Buttons */}
@@ -116,7 +138,7 @@ const CreatePerson = () => {
           variant="outlined"
           size="large"
           sx={{ mt: 0, width: '50%', height: '5rem' }}
-          disabled={!isFormValid}
+          disabled={!isInputValid}
           onClick={() => {
             setPerson({ name, birthdate, gender, riskGroup })
             navigate('/home')
@@ -129,7 +151,7 @@ const CreatePerson = () => {
           size="large"
           sx={{ mt: 0, width: '50%', height: '5rem' }}
           href="/datenaufnahme_start"
-          disabled={!isFormValid}
+          disabled={!isInputValid}
         >
           Impfungen aufnehmen
         </Button>
