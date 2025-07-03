@@ -18,7 +18,10 @@ const DateView = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const isValid = startDateInput && endDateInput && (new Date(startDateInput) <= new Date(endDateInput))
+    const typedStartDate = new Date(startDateInput)
+    const typedEndDate = new Date(endDateInput)
+    const now = Date.now()
+    const isValid = startDateInput && endDateInput && (typedStartDate <= typedEndDate) && typedStartDate >= now && typedEndDate >= now
     setIsInputValid(isValid)
   }, [startDateInput, endDateInput])
 
