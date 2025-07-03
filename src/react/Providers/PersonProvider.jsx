@@ -12,7 +12,7 @@ export const PersonProvider = ({ children }) => {
     name: 'Lena',
     birthdate: '22.10.1995',
     gender: 'weiblich',
-    riskGroup: 'Keine Angabe',
+    riskGroup: 'Keine',
     isPregnant: false,
     receiveNoticications: false,
     notificationWeeks: 0,
