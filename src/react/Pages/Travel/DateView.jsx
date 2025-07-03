@@ -136,7 +136,7 @@ const DateView = () => {
           Speichern
         </Button>
       </Stack>
-    </>
+    </Stack>
   )
 }
 
