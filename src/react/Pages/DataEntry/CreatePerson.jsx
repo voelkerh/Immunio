@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 import { Stack, Checkbox, FormControlLabel, FormGroup, Typography, Button, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
-
 import { usePerson } from '../../Providers/PersonProvider'
+import riskGroups from '../../../constants/riskGroups'
 
 const CreatePerson = () => {
   const navigate = useNavigate()
@@ -11,12 +11,14 @@ const CreatePerson = () => {
   const [birthdate, setBirthdate] = React.useState('')
   const [gender, setGender] = React.useState('')
   const [riskGroup, setRiskGroup] = React.useState('')
+  const [pregante, setPregante] = React.useState(false)
   const { setPerson } = usePerson()
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleBirthdateChange = (event) => setBirthdate(event.target.value)
   const handleGenderChange = (event) => setGender(event.target.value)
   const handleRiskGroupChange = (event) => setRiskGroup(event.target.value)
+  const handlePreganteChange = (event) => setPregante(event.target.checked)
 
   const isFormValid = name && birthdate && gender
 
@@ -86,17 +88,24 @@ const CreatePerson = () => {
               label="Risikogruppe"
               onChange={handleRiskGroupChange}
             >
-              <MenuItem value="none">Keine</MenuItem>
-              <MenuItem value="A">A</MenuItem>
-              <MenuItem value="B">B</MenuItem>
-              <MenuItem value="C">C</MenuItem>
+              {riskGroups.map((group) => (
+                <MenuItem key={group} value={group}>
+                  {group}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Stack>
         <Stack width="100%" mt={5}>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }} />}
+              control={
+                <Checkbox
+                  sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
+                  checked={pregante}
+                  onChange={handlePreganteChange}
+                />
+              }
               label="Schwangerschaft"
             />
           </FormGroup>
@@ -118,7 +127,14 @@ const CreatePerson = () => {
           sx={{ mt: 0, width: '50%', height: '5rem' }}
           disabled={!isFormValid}
           onClick={() => {
-            setPerson({ name, birthdate, gender, riskGroup })
+            setPerson(currentPerson => ({
+              ...currentPerson,
+              name,
+              birthdate,
+              gender,
+              riskGroup,
+              isPregnant: pregante
+            }))
             navigate('/home')
           }}
         >
