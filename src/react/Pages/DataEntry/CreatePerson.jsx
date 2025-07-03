@@ -13,6 +13,7 @@ const CreatePerson = () => {
   const [riskGroup, setRiskGroup] = useState('')
   const { setPerson } = usePerson()
   const [isInputValid, setIsInputValid] = useState(false)
+  const [isDateValid, setIsDateValid] = useState(false)
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleBirthdateChange = (event) => setBirthdate(event.target.value)
@@ -21,10 +22,17 @@ const CreatePerson = () => {
 
   useEffect(() => {
     const isValid = (
+      (new Date(birthdate) < Date.now())
+    )
+    setIsDateValid(isValid)
+  }, [birthdate])
+
+  useEffect(() => {
+    const isValid = (
       birthdate &&
       name &&
       gender &&
-      (new Date(birthdate) < Date.now())
+      isDateValid
     )
     setIsInputValid(isValid)
   }, [birthdate, name, gender])
@@ -109,11 +117,11 @@ const CreatePerson = () => {
               label="Schwangerschaft"
             />
           </FormGroup>
-          {!isInputValid && (
+          {(!isDateValid && birthdate) && (
             <Typography
               color="red"
             >
-              Bitte fülle alle Formularfelder aus. Das Geburtsdatum darf nicht in der Zukunft liegen.
+              Dein Geburtsdatum darf nicht in der Vergangenheit liegen.
             </Typography>
           )}
         </Stack>

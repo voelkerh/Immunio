@@ -20,7 +20,9 @@ const DateView = () => {
   useEffect(() => {
     const typedStartDate = new Date(startDateInput)
     const typedEndDate = new Date(endDateInput)
-    const now = Date.now()
+    const now = new Date()
+    now.setHours(0, 0, 0, 0)
+    console.log(now)
     const isValid = startDateInput && endDateInput && (typedStartDate <= typedEndDate) && typedStartDate >= now && typedEndDate >= now
     setIsInputValid(isValid)
   }, [startDateInput, endDateInput])
@@ -91,12 +93,12 @@ const DateView = () => {
               value={endDateInput}
               onChange={handleEndDateChange}
             />
-            {!isInputValid && (
+            {(!isInputValid && startDateInput && endDateInput) && (
               <Typography
                 color="red"
                 mt={2}
               >
-                Bitte gib ein An- und Abreise Datum ein. Das Abreise Datum muss nach dem Anreise Datum sein.
+                Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreise Datum muss vor dem Abreise Datum liegen.
               </Typography>
             )}
           </Stack>
