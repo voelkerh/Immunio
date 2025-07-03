@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import AppLayout from './AppLayout'
 import { AppBarProvider } from './Providers/AppBarProvider'
+import { CountryStatusProvider } from './Providers/CountryStatusProvider'
 import { PersonProvider } from './Providers/PersonProvider'
 
 const theme = createTheme({
@@ -38,12 +39,14 @@ const root = createRoot(container)
 root.render(
   <AppBarProvider>
     <PersonProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router>
-          <AppLayout />
-        </Router>
-      </ThemeProvider>
+      <CountryStatusProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router>
+            <AppLayout />
+          </Router>
+        </ThemeProvider>
+      </CountryStatusProvider>
     </PersonProvider>
   </AppBarProvider>
 )

@@ -31,9 +31,7 @@ const CreatePerson = () => {
     >
       {/* Page Title */}
       <Stack alignItems="center">
-        <Typography variant="h4" mt={5}>
-          Neue Person anlegen
-        </Typography>
+        <Typography variant="h4" mt={5}>Neue Person anlegen</Typography>
       </Stack>
       {/* Form Fields */}
       <Stack

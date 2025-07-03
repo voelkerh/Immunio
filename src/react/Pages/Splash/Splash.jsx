@@ -29,11 +29,7 @@ const Splash = ({ debug }) => {
       alignItems="center"
       height="100%"
     >
-      <Typography
-        variant="h3"
-      >
-        immunio.
-      </Typography>
+      <Typography variant="h3">immunio.</Typography>
     </Stack>
   )
 }

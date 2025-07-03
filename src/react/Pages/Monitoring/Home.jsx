@@ -40,29 +40,12 @@ const Home = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Stack
-        direction="row"
-        spacing={4}
-      >
-        <Typography variant="h4">
-          {person.name}
-        </Typography>
-        <Typography variant="h4">
-          {person.birthdate}
-        </Typography>
+      <Stack direction="row" spacing={4}>
+        <Typography variant="h4">{person.name}</Typography>
+        <Typography variant="h4">{person.birthdate}</Typography>
       </Stack>
       <Divider sx={dividerSx} />
-      <Stack
-        direction="row"
-        spacing={4}
-      >
-        <Typography variant="h5">
-          Impfstatus:
-        </Typography>
-        <Typography variant="h5">
-          {vaccinationStatus}
-        </Typography>
-      </Stack>
+      <Typography variant="h5">{`Impfstatus: ${vaccinationStatus}`}</Typography>
       <Divider sx={dividerSx}>Offene Schutzimpfungen</Divider>
       <List sx={listSx}>
         {generate(
