@@ -12,12 +12,27 @@ const DateView = () => {
   const { setPerson } = usePerson()
   const [startDateInput, setStartDateInput] = useState('')
   const [endDateInput, setEndDateInput] = useState('')
+  const [isInputValid, setIsInputValid] = useState(false)
 
   const { setConfig } = useAppBar()
   const navigate = useNavigate()
 
-  const handleStartDateChange = (event) => setStartDateInput(event.target.value)
-  const handleEndDateChange = (event) => setEndDateInput(event.target.value)
+  useEffect(() => {
+    const typedStartDate = new Date(startDateInput)
+    const typedEndDate = new Date(endDateInput)
+    const now = new Date()
+    now.setHours(0, 0, 0, 0)
+    console.log(now)
+    const isValid = startDateInput && endDateInput && (typedStartDate <= typedEndDate) && typedStartDate >= now && typedEndDate >= now
+    setIsInputValid(isValid)
+  }, [startDateInput, endDateInput])
+
+  const handleStartDateChange = (event) => {
+    setStartDateInput(event.target.value)
+  }
+  const handleEndDateChange = (event) => {
+    setEndDateInput(event.target.value)
+  }
 
   const saveAndReturn = () => {
     setPerson(prev => {
@@ -78,13 +93,21 @@ const DateView = () => {
               value={endDateInput}
               onChange={handleEndDateChange}
             />
+            {(!isInputValid && startDateInput && endDateInput) && (
+              <Typography
+                color="red"
+                mt={2}
+              >
+                Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreise Datum muss vor dem Abreise Datum liegen.
+              </Typography>
+            )}
           </Stack>
         </Stack>
       </Stack>
       <Stack margin="20px">
         <Button
           variant="contained"
-          disabled={!startDateInput || !endDateInput}
+          disabled={!isInputValid}
           onClick={saveAndReturn}
         >
           Speichern
