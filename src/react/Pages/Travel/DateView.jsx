@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Stack } from '@mui/system'
@@ -17,17 +17,6 @@ const DateView = () => {
 
   const { setConfig } = useAppBar()
   const navigate = useNavigate()
-
-  const isEditing = tripId !== undefined
-  const existingTrip = isEditing ? person.plannedTrips.find(trip => trip.id === decodeURIComponent(tripId)) : null
-
-  useEffect(() => {
-    if (isEditing && existingTrip) {
-      // Fill fields with existing trip data
-      setStartDateInput(existingTrip.startDate || '')
-      setEndDateInput(existingTrip.endDate || '')
-    }
-  }, [isEditing, existingTrip])
 
   const isEditing = tripId !== undefined
   const existingTrip = isEditing ? person.plannedTrips.find(trip => trip.id === decodeURIComponent(tripId)) : null
