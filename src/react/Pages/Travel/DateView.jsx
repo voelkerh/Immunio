@@ -12,12 +12,23 @@ const DateView = () => {
   const { setPerson } = usePerson()
   const [startDateInput, setStartDateInput] = useState('')
   const [endDateInput, setEndDateInput] = useState('')
+  const [isInputValid, setIsInputValid] = useState(false)
 
   const { setConfig } = useAppBar()
   const navigate = useNavigate()
 
-  const handleStartDateChange = (event) => setStartDateInput(event.target.value)
-  const handleEndDateChange = (event) => setEndDateInput(event.target.value)
+  useEffect(() => {
+    const isValid = startDateInput && endDateInput && (new Date(startDateInput) <= new Date(endDateInput))
+    setIsInputValid(isValid)
+    console.log(`Validation: startDate: ${startDateInput}, endDate: ${endDateInput}, isValid: ${isValid}`)
+  }, [startDateInput, endDateInput])
+
+  const handleStartDateChange = (event) => {
+    setStartDateInput(event.target.value)
+  }
+  const handleEndDateChange = (event) => {
+    setEndDateInput(event.target.value)
+  }
 
   const saveAndReturn = () => {
     setPerson(prev => {
@@ -78,13 +89,21 @@ const DateView = () => {
               value={endDateInput}
               onChange={handleEndDateChange}
             />
+            {!isInputValid && (
+              <Typography
+                color="red"
+                mt={2}
+              >
+                Bitte gib ein An- und Abreise Datum ein. Das Abreise Datum muss nach dem Anreise Datum sein.
+              </Typography>
+            )}
           </Stack>
         </Stack>
       </Stack>
       <Stack margin="20px">
         <Button
           variant="contained"
-          disabled={!startDateInput || !endDateInput}
+          disabled={!isInputValid}
           onClick={saveAndReturn}
         >
           Speichern
