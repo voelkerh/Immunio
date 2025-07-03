@@ -7,20 +7,25 @@ import { Typography, Button, Divider, List, ListItem, ListItemText } from '@mui/
 
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
+import { useCountryStatus } from '../../Providers/CountryStatusProvider'
 
-import travelData from '../../../assets/travel_vaccinations.json'
+const dividerSx = { width: '100%', my: 2 }
+const listSx = { width: '100%' }
+const listItemSx = { divider: true }
 
 const CountryView = () => {
   const { name } = useParams()
+  const countryName = name.toLowerCase().replaceAll(' ', '-')
   const { setConfig } = useAppBar()
-
   const { person, setPerson } = usePerson()
-
+  const { statusMap } = useCountryStatus()
+  const { missing = [], recommended = [] } = statusMap[countryName] || {} // fallback if not yet loaded
+  const isTravelVaccComplete = missing?.length === 0
   const navigate = useNavigate()
-
-  const dividerSx = { width: '100%', my: 2 }
-  const listSx = { width: '100%' }
-  const listItemSx = { divider: true }
+  let statusText = 'Unbekannt'
+  if (recommended.length > 0) {
+    statusText = isTravelVaccComplete ? 'Vollständig' : 'Unvollständig'
+  }
 
   useEffect(() => {
     setConfig({
@@ -31,7 +36,6 @@ const CountryView = () => {
     })
   }, [])
 
-  const recommendations = travelData[name.toLowerCase().replaceAll(' ', '-')]
   const saveAndNext = () => {
     console.log('prev', person)
     setPerson(prev => ({
@@ -49,25 +53,37 @@ const CountryView = () => {
       justifyContent="start"
       alignItems="center"
     >
-      <Typography variant="h4">
-        {name}
-      </Typography>
+      <Typography variant="h4">{name}</Typography>
       <Divider sx={dividerSx} />
       <Typography variant="h6">
-        Impfstatus un/genügend
+        Impfstatus:
+        {' '}
+        {statusText}
       </Typography>
+      {!isTravelVaccComplete && (
+        <>
+          <Divider sx={dividerSx}>Fehlende Impfungen</Divider>
+          <List sx={listSx}>
+            {missing.map((vaccination) => (
+              <ListItem key={vaccination} sx={listItemSx}>
+                <ListItemText primary={vaccination} />
+              </ListItem>
+            ))}
+          </List>
+        </>
+      )}
       <Divider sx={dividerSx}>Empfohlene Impfungen</Divider>
+      {recommended.length === 0 && (
+        <Typography>Für dieses Land liegen keine Empfehlungen vor.</Typography>
+      )}
       <List sx={listSx}>
-        {recommendations?.map((vaccine) => (
-          <ListItem key={vaccine} sx={listItemSx}>
-            <ListItemText primary={vaccine} />
+        {recommended.map((vaccination) => (
+          <ListItem key={vaccination} sx={listItemSx}>
+            <ListItemText primary={vaccination} />
           </ListItem>
         ))}
       </List>
-      <Button
-        variant="contained"
-        onClick={saveAndNext}
-      >
+      <Button variant="contained" onClick={saveAndNext}>
         Reise hinzufügen
       </Button>
     </Stack>

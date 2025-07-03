@@ -130,12 +130,13 @@ const DateView = () => {
       <Stack>
         <Button
           variant="contained"
+          disabled={!startDateInput || !endDateInput}
           onClick={saveAndReturn}
         >
           Speichern
         </Button>
       </Stack>
-    </Stack>
+    </>
   )
 }
 
