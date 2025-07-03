@@ -34,7 +34,6 @@ const DateView = () => {
     const typedEndDate = new Date(endDateInput)
     const now = new Date()
     now.setHours(0, 0, 0, 0)
-    console.log(now)
     const isValid = startDateInput && endDateInput && (typedStartDate <= typedEndDate) && typedStartDate >= now && typedEndDate >= now
     setIsInputValid(isValid)
   }, [startDateInput, endDateInput])
