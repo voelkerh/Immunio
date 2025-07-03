@@ -20,6 +20,7 @@ import ProfileSettings from './Pages/Profile/ProfileSettings'
 import Splash from './Pages/Splash/Splash'
 
 import Error404 from './Pages/Error404'
+import AddVaccination from './Pages/Monitoring/AddVaccination'
 
 const AppRoutes = () => (
   <Routes>
@@ -30,6 +31,8 @@ const AppRoutes = () => (
     <Route path="/" element={<Splash debug />} />
 
     <Route path="/home" element={<Home />} />
+
+    <Route path="/add_vaccination/:disease" element={<AddVaccination />} />
 
     <Route path="/first_home" element={<FirstTimeHome />} />
 

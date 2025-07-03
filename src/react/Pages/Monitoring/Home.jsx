@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
-import { Stack, Typography, Divider, List, ListItem, ListItemText } from '@mui/material'
+import { Stack, Typography, Divider, List, ListItem, ListItemText, Paper } from '@mui/material'
 import { Settings } from '@mui/icons-material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
@@ -13,7 +13,7 @@ const generate = (element) => [0, 1, 2].map((value) => React.cloneElement(elemen
 }),)
 
 /* Implement monitoring logic based on person.vaccinations here */
-const isVaccinationComplete = (vaccinations) => 'Unvollständig'
+const isVaccinationComplete = () => 'Unvollständig'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -32,7 +32,7 @@ const Home = () => {
 
   const dividerSx = { width: '100%', my: 2 }
   const listSx = { width: '100%' }
-  const listItemSx = { divider: true }
+  const listItemSx = { divider: true, borderRadius: 5 }
 
   return (
     <Stack
@@ -49,29 +49,27 @@ const Home = () => {
       <Divider sx={dividerSx}>Offene Schutzimpfungen</Divider>
       <List sx={listSx}>
         {generate(
-          <ListItem sx={listItemSx}>
-            <ListItemText
-              primary="Vaccination"
-              secondary="Due date"
-              onClick={() => {
-                navigate('*')
-              }}
-            />
-          </ListItem>,
+          <Paper elevation={2} sx={{ mb: 1, borderRadius: 5 }}>
+            <ListItem button sx={listItemSx} onClick={() => { navigate('/add_vaccination/typhoid') }}>
+              <ListItemText
+                primary="Vaccination"
+                secondary="Due date"
+              />
+            </ListItem>
+          </Paper>,
         )}
       </List>
       <Divider sx={dividerSx}>Offene Reiseimpfungen</Divider>
       <List sx={listSx}>
         {generate(
-          <ListItem sx={listItemSx}>
-            <ListItemText
-              primary="Vaccination"
-              secondary="Due date"
-              onClick={() => {
-                navigate('*')
-              }}
-            />
-          </ListItem>,
+          <Paper elevation={2} sx={{ mb: 1, borderRadius: 5 }}>
+            <ListItem button sx={listItemSx} onClick={() => { navigate('/add_vaccination/typhoid') }}>
+              <ListItemText
+                primary="Vaccination"
+                secondary="Due date"
+              />
+            </ListItem>
+          </Paper>,
         )}
       </List>
     </Stack>
