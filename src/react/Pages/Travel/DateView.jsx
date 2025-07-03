@@ -96,60 +96,60 @@ const DateView = () => {
   }
 
   return (
-    <Stack
-      flex="1 1 auto"
-      width="100%"
-      height="100%"
-      justifyContent="start"
-      alignItems="center"
-    >
-      <Stack alignItems="center">
-        <Typography variant="h4" mt={5}>
-          {isEditing ? 'Reise bearbeiten' : 'Reisedaten'}
-        </Typography>
-        {isEditing && existingTrip && (
-          <Typography variant="h6" mt={2}>
-            {existingTrip.country.charAt(0).toUpperCase() + existingTrip.country.slice(1).toLowerCase()}
-          </Typography>
-        )}
-      </Stack>
+    <>
       <Stack
-        id="formFields"
+        flex="1 1 auto"
+        justifyContent="start"
         alignItems="center"
-        width="100%"
+        gap={5}
       >
-        <Stack width="100%" mt={5}>
-          <TextField
-            required
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Abfahrt"
-            type="date"
-            variant="outlined"
-            value={startDateInput}
-            onChange={handleStartDateChange}
-          />
-        </Stack>
-        <Stack width="100%" mt={5}>
-          <TextField
-            required
-            slotProps={{ inputLabel: { shrink: true } }}
-            label="Rückkehr"
-            type="date"
-            variant="outlined"
-            value={endDateInput}
-            onChange={handleEndDateChange}
-          />
-          {(!isInputValid && startDateInput && endDateInput) && (
-            <Typography
-              color="red"
-              mt={2}
-            >
-              Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreisedatum muss vor dem Abreisedatum liegen.
+        <Stack alignItems="center">
+          <Typography variant="h4" mt={5}>{isEditing ? 'Reise bearbeiten' : 'Reisedaten'}</Typography>
+          {isEditing && existingTrip && (
+            <Typography variant="h6" mt={2}>
+              {existingTrip.country.charAt(0).toUpperCase() + existingTrip.country.slice(1).toLowerCase()}
             </Typography>
           )}
         </Stack>
+        <Stack
+          id="formFields"
+          alignItems="center"
+          width="80%"
+          gap={5}
+        >
+          <Stack width="100%">
+            <TextField
+              required
+              slotProps={{ inputLabel: { shrink: true } }}
+              label="Abfahrt"
+              type="date"
+              variant="outlined"
+              value={startDateInput}
+              onChange={handleStartDateChange}
+            />
+          </Stack>
+          <Stack width="100%">
+            <TextField
+              required
+              slotProps={{ inputLabel: { shrink: true } }}
+              label="Rückkehr"
+              type="date"
+              variant="outlined"
+              value={endDateInput}
+              onChange={handleEndDateChange}
+            />
+            {(!isInputValid && startDateInput && endDateInput) && (
+              <Typography
+                color="red"
+                mt={2}
+              >
+                Die Daten dürfen nicht in der Vergangenheit liegen. Das Anreise Datum muss vor dem Abreise Datum liegen.
+              </Typography>
+            )}
+          </Stack>
+        </Stack>
       </Stack>
-      <Stack>
+      <Stack margin="20px">
         <Button
           variant="contained"
           disabled={!isInputValid}
@@ -158,7 +158,7 @@ const DateView = () => {
           Speichern
         </Button>
       </Stack>
-    </Stack>
+    </>
   )
 }
 
