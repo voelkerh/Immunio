@@ -20,7 +20,6 @@ const DateView = () => {
   useEffect(() => {
     const isValid = startDateInput && endDateInput && (new Date(startDateInput) <= new Date(endDateInput))
     setIsInputValid(isValid)
-    console.log(`Validation: startDate: ${startDateInput}, endDate: ${endDateInput}, isValid: ${isValid}`)
   }, [startDateInput, endDateInput])
 
   const handleStartDateChange = (event) => {
