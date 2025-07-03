@@ -12,8 +12,10 @@ export const PersonProvider = ({ children }) => {
     name: '',
     birthdate: '',
     gender: '',
-    riskGroup: '',
+    riskGroups: '',
     isPregnant: false,
+    receiveNoticications: false,
+    notificationWeeks: 0,
     vaccinations: [
       { id: 0, category: 'gelbfieber', name: 'Gelbfieberimpfung 1', date: '22.02.2022' },
       { id: 1, category: 'schutzimpfung', name: 'Schutzimpfung 1', date: '22.02.2022' },
