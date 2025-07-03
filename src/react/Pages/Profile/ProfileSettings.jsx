@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 
-import { Stack, Typography, Checkbox, FormGroup, FormControlLabel, TextField, Divider } from '@mui/material'
+import { Stack, Typography, Checkbox, FormGroup, FormControlLabel, TextField, Divider, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete'
 import { ArrowBack } from '@mui/icons-material'
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
+import riskGroups from '../../../constants/riskGroups'
 
 const ProfileSettings = () => {
   const { setConfig } = useAppBar()
@@ -21,24 +22,7 @@ const ProfileSettings = () => {
   const { person, setPerson } = usePerson()
 
   const weeks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-  const riskGroups = [
-    'Bewohner*in In Altenpflege-/Pflegeeinrichtung',
-    'Beschäftigte*r In Altenpflege-/Pflegeeinrichtung',
-    'Älter Als 60',
-    'Enge Kontaktperson Von Menschen Mit Geschwächtem Immunsystem',
-    'Angeborene Oder Erworbene Abwehrschwäche (Immundefizienz)',
-    'Relevante Unterdrückung Des Abwehrsystems (Immunsuppression)',
-    'Chronische HerzKreislauferkrankungen',
-    'Chronische Erkrankungen Der Atmungsorgane',
-    'Chronische Lebererkrankungen',
-    'Chronische Nierenerkrankungen',
-    'Chronische Erkrankung Des Nervensystems',
-    'Demenz Oder Geistige Behinderung',
-    'Psychiatrische Erkrankungen',
-    'Stoffwechselerkrankungen, Wie Starkes Übergewicht Und Diabetes Mellitus (\'Zuckerkrankheit\')',
-    'Downsyndrom (Trisomie 21)',
-    'Aktive Krebserkrankungen.'
-  ]
+  console.log(person)
 
   return (
     <Stack
@@ -68,6 +52,22 @@ const ProfileSettings = () => {
               <Typography variant="h6">Erhalten</Typography>
             }
           />
+          <FormControl
+            sx={{ width: 300, marginTop: 1 }}
+          >
+            <InputLabel id="notification-weeks-label">Wochen vor Fälligkeit</InputLabel>
+            <Select
+              labelId="notification-weeks-label"
+              id="select-notification-weeks"
+              label="Wochen vor Fälligkeit"
+            >
+              {weeks.map((group) => (
+                <MenuItem key={group} value={group}>
+                  {group}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Autocomplete
             options={weeks}
             sx={{ width: 300, marginTop: 1 }}
@@ -81,11 +81,24 @@ const ProfileSettings = () => {
           >
             Personenbezogenes
           </Typography>
-          <Autocomplete
-            options={riskGroups}
+          <FormControl
             sx={{ width: 300, marginTop: 1 }}
-            renderInput={(params) => <TextField {...params} label="Risikogruppe" />}
-          />
+          >
+            <InputLabel id="risk-group-label">Risikogruppe</InputLabel>
+            <Select
+              labelId="risk-group-label"
+              id="select-risk-group"
+              label="Risikogruppe"
+              value={person.riskGroup || ''}
+              onChange={(event) => { setPerson({ ...person, riskGroup: event.target.value }) }}
+            >
+              {riskGroups.map((group) => (
+                <MenuItem key={group} value={group}>
+                  {group}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <FormControlLabel
             sx={{ marginTop: 1 }}
             control={<Checkbox
