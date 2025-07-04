@@ -6,6 +6,7 @@ import { Settings } from '@mui/icons-material'
 
 import { useAppBar } from '../../Providers/AppBarProvider'
 import { usePerson } from '../../Providers/PersonProvider'
+import OpenTravelVaccList from './OpenTravelVaccList'
 
 /* Implement logic to base list items on person.vaccinations / person.travelVaccinations here */
 const generate = (element) => [0, 1, 2].map((value) => React.cloneElement(element, {
@@ -61,19 +62,7 @@ const Home = () => {
         )}
       </List>
       <Divider sx={dividerSx}>Offene Reiseimpfungen</Divider>
-      <List sx={listSx}>
-        {generate(
-          <ListItem sx={listItemSx}>
-            <ListItemText
-              primary="Vaccination"
-              secondary="Due date"
-              onClick={() => {
-                navigate('*')
-              }}
-            />
-          </ListItem>,
-        )}
-      </List>
+      <OpenTravelVaccList />
     </Stack>
   )
 }
