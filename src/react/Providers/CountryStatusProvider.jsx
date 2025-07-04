@@ -1,10 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { usePerson } from './PersonProvider'
 import travelVaccinationsAllCountries from '../../assets/travel_vaccinations.json'
-
-const getRecommendations = (countryName) => travelVaccinationsAllCountries[countryName]?.filter(vaccination => vaccination !== 'Routine vaccines') || []
-
-const getMissingVaccinations = (recommendations, vaccinations) => recommendations.filter(recommendation => !vaccinations?.some(vaccination => vaccination.diseases.includes(recommendation)))
+import getCountryRecommendations from '../Utils/getCountryRecommendations'
+import getMissingTravelVaccinationsForCountry from '../Utils/getMissingTravelVaccinationsForCountry'
 
 const CountryStatusContext = createContext()
 
@@ -19,8 +17,8 @@ export const CountryStatusProvider = ({ children }) => {
     const newStatusMap = {}
 
     Object.keys(travelVaccinationsAllCountries).forEach((countryKey) => {
-      const recommendations = getRecommendations(countryKey)
-      const missingVaccinations = getMissingVaccinations(recommendations, person?.vaccinations)
+      const recommendations = getCountryRecommendations(countryKey)
+      const missingVaccinations = getMissingTravelVaccinationsForCountry(recommendations, person?.vaccinations)
       newStatusMap[countryKey] = {
         missing: missingVaccinations,
         recommended: recommendations
