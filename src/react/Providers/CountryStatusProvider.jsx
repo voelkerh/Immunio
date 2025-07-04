@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 import { usePerson } from './PersonProvider'
 import travelVaccinationsAllCountries from '../../assets/travel_vaccinations.json'
 import getCountryRecommendations from '../Utils/getCountryRecommendations'
-import getMissingTravelVaccinationsForCountry from '../Utils/getMissingTravelVaccinationsForCountry'
+import getMissingTravelVaccinations from '../Utils/getMissingTravelVaccinations'
 
 const CountryStatusContext = createContext()
 
@@ -18,7 +18,7 @@ export const CountryStatusProvider = ({ children }) => {
 
     Object.keys(travelVaccinationsAllCountries).forEach((countryKey) => {
       const recommendations = getCountryRecommendations(countryKey)
-      const missingVaccinations = getMissingTravelVaccinationsForCountry(recommendations, person?.vaccinations)
+      const missingVaccinations = getMissingTravelVaccinations(recommendations, person?.vaccinations)
       newStatusMap[countryKey] = {
         missing: missingVaccinations,
         recommended: recommendations
