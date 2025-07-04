@@ -6,6 +6,7 @@ const getRecommendations = (countryName) => travelVaccinationsAllCountries[count
 
 const getMissingVaccinations = (recommendations, vaccinations) => recommendations.filter(recommendation => !vaccinations?.some(vaccination => vaccination.diseases.includes(recommendation)))
 
+// TODO: direkt use context für Export verwenden
 const CountryStatusContext = createContext()
 
 export const useCountryStatus = () => useContext(CountryStatusContext)
